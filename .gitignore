@@ -1,0 +1,9 @@
+/config.php
+/cache/*.php
+/cache/*.html
+/cache/*.lock
+/files/*
+/ext/*
+/images/avatars/gallery/*
+/images/avatars/upload/*
+/.idea
