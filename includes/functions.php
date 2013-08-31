@@ -4623,6 +4623,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'S_USER_LANG'			=> $user_lang,
 		'S_USER_BROWSER'		=> (isset($user->data['session_browser'])) ? $user->data['session_browser'] : $user->lang['UNKNOWN_BROWSER'],
 		'S_USERNAME'			=> $user->data['username'],
+		'S_USER_ID'	  		    => $user->data['user_id'],
 		'S_CONTENT_DIRECTION'	=> $user->lang['DIRECTION'],
 		'S_CONTENT_FLOW_BEGIN'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
 		'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
