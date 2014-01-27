@@ -1,0 +1,33 @@
+<!-- IF .draftrow -->
+	
+	<h3>{L_LOAD_DRAFT}</h3>
+	
+	<div class="alert alert-info fade in">
+		<button class="close" data-dismiss="alert"><span class="awe-remove-circle"></span></button>
+		<strong>Draft Loaded</strong><br> {L_LOAD_DRAFT_EXPLAIN}
+	</div>
+
+<table class="footable table table-striped table-bordered table-white table-primary table-hover">
+	
+	<thead>
+		<tr>
+			<th data-class="expand"><i class="icon-bar-chart"></i> {L_LOAD_DRAFT}</th>
+			<th data-hide="phone"><i class="icon-bar-chart"></i> {L_SAVE_DATE}</th>
+		</tr>
+	</thead>		
+		
+	<tbody>
+	<!-- BEGIN draftrow -->
+	     <tr>
+			<td class="center">
+			    <a href="{draftrow.U_INSERT}" title="{L_LOAD_DRAFT}" class="topictitle"><i class="icon-edit"></i> {draftrow.DRAFT_SUBJECT}</a><br />
+				<!-- IF not S_PRIVMSGS --><!-- IF draftrow.S_LINK_TOPIC -->{L_TOPIC}: <a href="{draftrow.U_VIEW}">{draftrow.TITLE}</a>
+				<!-- ELSEIF draftrow.S_LINK_FORUM -->{L_FORUM}: <a href="{draftrow.U_VIEW}">{draftrow.TITLE}</a>
+				<!-- ELSE -->{L_NO_TOPIC_FORUM}<!-- ENDIF --><!-- ENDIF -->
+			</td>
+			<td class="center"><i class="icon-time"></i> {draftrow.DATE}</td>
+		</tr>
+	<!-- END draftrow -->
+	</tbody>
+  </table>
+<!-- ENDIF -->

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[BBOOTS CORE EDITS]]></title>
+		<description lang="en"><![CDATA[It adds proper functionality to BBOOTS template by editing few phpBB3 core files.]]></description>
+		<author-group>
+			<author>
+				<username phpbbcom="no"><![CDATA[SiteSplat]]></username>
+				<homepage><![CDATA[www.sitesplat.com]]></homepage>
+				<email><![CDATA[info@sitesplat.com]]></email>
+			</author>
+		</author-group>
+		<mod-version>2.0.1</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>300</time>
+			<target-version>3.0.12</target-version>
+		</installation>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/images/*.*" to="*.*"/>
+			<file from="root/*.*" to="*.*"/>
+		</copy>
+		<open src="viewtopic.php">
+			<edit>
+				<find><![CDATA['S_TOPIC_MOD' 			=> ($topic_mod != '') ? '<select name="action" id="quick-mod-select">' . $topic_mod . '</select>' : '',]]></find>
+				<action type="replace-with"><![CDATA['S_TOPIC_MOD' 			=> ($topic_mod != '') ? '<select class="selectpicker" data-container="body" name="action" id="quick-mod-select">' . $topic_mod . '</select>' : '',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['U_BOOKMARK_TOPIC'		=> ($user->data['is_registered'] && $config['allow_bookmarks']) ? $viewtopic_url . '&amp;bookmark=1&amp;hash=' . generate_link_hash("topic_$topic_id") : '',]]></find>
+				<action type="after-add"><![CDATA['BOOKMARK_CLASS'        => ($user->data['is_registered'] && $config['allow_bookmarks'] && $topic_data['bookmarked']) ? 'icon-bookmark-empty' : 'icon-bookmark',]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[$page_string = ($on_page == 1) ? '<strong>1</strong>' : '<a href="' . $base_url . '">1</a>';]]></find>
+				<action type="replace-with"><![CDATA[$page_string = ($on_page == 1) ? '<strong>1</strong>' : '<a href="' . $base_url . '">1</a>';]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string .= ($start_cnt > 1) ? '<span class="page-dots"> ... </span>' : $seperator;]]></find>
+				<action type="replace-with"><![CDATA[$page_string .= ($start_cnt > 1) ? '<li class="active"><a> ... </a></li>' : $seperator;]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';]]></find>
+				<action type="replace-with"><![CDATA[$page_string .= ($i == $on_page) ? '<li class="active"><a>' . $i . '</a></li>' : '<li><a href="' . $base_url . "{$url_delim}start=" . (($i - 1) * $per_page) . '">' . $i . '</a></li>';]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string .= ($end_cnt < $total_pages) ? '<span class="page-dots"> ... </span>' : $seperator;]]></find>
+				<action type="replace-with"><![CDATA[$page_string .= ($end_cnt < $total_pages) ? '<li class="active"><a> ... </a></li>' : $seperator;]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';]]></find>
+				<action type="replace-with"><![CDATA[$page_string .= ($i == $on_page) ? '<li class="active"><a>' . $i . '</a></li>' : '<li><a href="' . $base_url . "{$url_delim}start=" . (($i - 1) * $per_page) . '">' . $i . '</a></li>';]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string .= ($on_page == $total_pages) ? '<strong>' . $total_pages . '</strong>' : '<a href="' . $base_url . "{$url_delim}start=" . (($total_pages - 1) * $per_page) . '">' . $total_pages . '</a>';]]></find>
+				<action type="replace-with"><![CDATA[$page_string .= ($on_page == $total_pages) ? '<li class="active"><a>' . $total_pages . '</a></li>' : '<li><a href="' . $base_url . "{$url_delim}start=" . (($total_pages - 1) * $per_page) . '">' . $total_pages . '</a></li>';]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string = '<a href="' . $base_url . "{$url_delim}start=" . (($on_page - 2) * $per_page) . '">' . $user->lang['PREVIOUS'] . '</a>&nbsp;&nbsp;' . $page_string;]]></find>
+				<action type="replace-with"><![CDATA[$page_string = '<li><a href="' . $base_url . "{$url_delim}start=" . (($on_page - 2) * $per_page) . '">' . $user->lang['PREVIOUS'] . '</a></li>&nbsp;&nbsp;' . $page_string;]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "{$url_delim}start=" . ($on_page * $per_page) . '">' . $user->lang['NEXT'] . '</a>';]]></find>
+				<action type="replace-with"><![CDATA[$page_string .= '&nbsp;&nbsp;<li><a href="' . $base_url . "{$url_delim}start=" . ($on_page * $per_page) . '">' . $user->lang['NEXT'] . '</a></li>';]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[// The following assigns all _common_ variables that may be used at any point in a template.]]></find>
+				<action type="before-add"><![CDATA[//  avatars
+if (!function_exists('get_user_avatar'))
+{
+   include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
+}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['SITENAME'						=> $config['sitename'],]]></find>
+				<action type="after-add"><![CDATA['USER_AVATAR'   => ($user->data['user_avatar']) ? get_user_avatar($user->data['user_avatar'],$user->data['user_avatar_type'], ($user->data['user_avatar_width'] > $user->data['user_avatar_height']) ? 22 : round((22 / $user->data['user_avatar_height']) * $user->data['user_avatar_width']), ($user->data['user_avatar_height'] > $user->data['user_avatar_width']) ? 22 : round((22 / $user->data['user_avatar_width']) * $user->data['user_avatar_height'])) : '<i class="icon-picture"></i>',
+	    'CURRENT_USERNAME'  => $user->data['username'],]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		'L_ONLINE_EXPLAIN'	=> $l_online_time,]]></find>
+				<action type="after-add"><![CDATA[	/* Begin Extended UCP Menu Functions for bboots */
+          'U_UCP_MAIN'               => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main'),
+          'U_UCP_MAIN_FRONT'            => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&amp;mode=front'),
+          'U_UCP_MAIN_SUBSCRIPTION'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&amp;mode=subscribed'),
+          'U_UCP_MAIN_BOOKMARKS'         => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&amp;mode=bookmarks'),
+          'U_UCP_MAIN_DRAFTS'            => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&amp;mode=drafts'),
+          'U_UCP_MAIN_ATTACHMENTS'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=attachments&amp;mode=attachments'),
+
+          'U_UCP_PROFILE'               => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=profile'),
+          'U_UCP_PROFILE_PROFILE'         => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=profile&amp;mode=profile_info'),
+          'U_UCP_PROFILE_SIGNITURE'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=profile&amp;mode=signature'),
+          'U_UCP_PROFILE_AVATAR'         => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=profile&amp;mode=avatar'),
+          'U_UCP_PROFILE_SETTINGS'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=profile&amp;mode=reg_details'),
+
+          'U_UCP_PREFERENCE'            => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=prefs'),
+          'U_UCP_PREFERENCE_SETTINGS'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=prefs&amp;mode=personal'),
+          'U_UCP_PREFERENCE_DEFAULTS'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=prefs&amp;mode=post'),
+          'U_UCP_PREFERENCE_OPTIONS'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=prefs&amp;mode=view'),
+
+          'U_UCP_PM'                  => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm'),
+          'U_UCP_PM_COMPOSE'            => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;mode=compose'),
+          'U_UCP_PM_DRAFTS_COPY'            => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;mode=drafts'),
+          'U_UCP_PM_INBOX'            => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),
+          'U_UCP_PM_OUTBOX'            => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=outbox'),
+          'U_UCP_PM_SENTBOX'            => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=sentbox'),
+          'U_UCP_PM_OPTIONS'            => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;mode=options'),
+
+          'U_UCP_GROUPS'            => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=groups'),
+          'U_UCP_GROUPS_MEMBERSHIP'   => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=groups&amp;mode=membership'),
+          'U_UCP_GROUPS_MANAGE'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=groups&amp;mode=manage'),
+
+          'U_UCP_ZEBRA'               => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=zebra'),
+          'U_UCP_ZEBRA_FRIENDS'         => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=zebra&amp;mode=friends'),
+          'U_UCP_ZEBRA_FOES'            => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=zebra&amp;mode=foes'),
+		  'U_LOGOUT'		=> $u_login_logout,
+		  'U_ELEMENTS'				=> append_sid("{$phpbb_root_path}elements.$phpEx"),
+    /* Begin Extended UCP Menu Functions for boots */]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions_content.php">
+			<edit>
+				<find><![CDATA[$sort_ary['output'] = '<select name="' . $name . '" id="' . $name . '">';]]></find>
+				<action type="replace-with"><![CDATA[    $sort_ary['output'] = '<select class="selectpicker" data-width="120px" data-container="body" name="' . $name . '" id="' . $name . '">';]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions_display.php">
+			<edit>
+				<find><![CDATA[$pagination .= '<span class="page-dots"> ... </span>';]]></find>
+				<action type="replace-with"><![CDATA[$pagination .= '<li class="page-dots"> ... </li>';]]></action>
+			</edit>
+		</open>
+		<open src="includes/ucp/ucp_prefs.php">
+			<edit>
+				<find><![CDATA[$_options = array('topic', 'post');
+				foreach ($_options as $sort_option)
+				{
+					${'s_limit_' . $sort_option . '_days'} = '<select name="' . $sort_option . '_st">';
+					foreach (${'limit_' . $sort_option . '_days'} as $day => $text)
+					{
+						$selected = ($data[$sort_option . '_st'] == $day) ? ' selected="selected"' : '';
+						${'s_limit_' . $sort_option . '_days'} .= '<option value="' . $day . '"' . $selected . '>' . $text . '</option>';
+					}
+					${'s_limit_' . $sort_option . '_days'} .= '</select>';
+
+					${'s_sort_' . $sort_option . '_key'} = '<select name="' . $sort_option . '_sk">';
+					foreach (${'sort_by_' . $sort_option . '_text'} as $key => $text)
+					{
+						$selected = ($data[$sort_option . '_sk'] == $key) ? ' selected="selected"' : '';
+						${'s_sort_' . $sort_option . '_key'} .= '<option value="' . $key . '"' . $selected . '>' . $text . '</option>';
+					}
+					${'s_sort_' . $sort_option . '_key'} .= '</select>';
+
+					${'s_sort_' . $sort_option . '_dir'} = '<select name="' . $sort_option . '_sd">';
+					foreach ($sort_dir_text as $key => $value)
+					{
+						$selected = ($data[$sort_option . '_sd'] == $key) ? ' selected="selected"' : '';
+						${'s_sort_' . $sort_option . '_dir'} .= '<option value="' . $key . '"' . $selected . '>' . $value . '</option>';
+					}
+					${'s_sort_' . $sort_option . '_dir'} .= '</select>';
+				}]]></find>
+				<action type="replace-with"><![CDATA[$_options = array('topic', 'post');
+				foreach ($_options as $sort_option)
+				{
+					${'s_limit_' . $sort_option . '_days'} = '<select class="selectpicker" data-container="body" name="' . $sort_option . '_st">';
+					foreach (${'limit_' . $sort_option . '_days'} as $day => $text)
+					{
+						$selected = ($data[$sort_option . '_st'] == $day) ? ' selected="selected"' : '';
+						${'s_limit_' . $sort_option . '_days'} .= '<option value="' . $day . '"' . $selected . '>' . $text . '</option>';
+					}
+					${'s_limit_' . $sort_option . '_days'} .= '</select>';
+
+					${'s_sort_' . $sort_option . '_key'} = '<select class="selectpicker" data-container="body" name="' . $sort_option . '_sk">';
+					foreach (${'sort_by_' . $sort_option . '_text'} as $key => $text)
+					{
+						$selected = ($data[$sort_option . '_sk'] == $key) ? ' selected="selected"' : '';
+						${'s_sort_' . $sort_option . '_key'} .= '<option value="' . $key . '"' . $selected . '>' . $text . '</option>';
+					}
+					${'s_sort_' . $sort_option . '_key'} .= '</select>';
+
+					${'s_sort_' . $sort_option . '_dir'} = '<select class="selectpicker" data-container="body" name="' . $sort_option . '_sd">';
+					foreach ($sort_dir_text as $key => $value)
+					{
+						$selected = ($data[$sort_option . '_sd'] == $key) ? ' selected="selected"' : '';
+						${'s_sort_' . $sort_option . '_dir'} .= '<option value="' . $key . '"' . $selected . '>' . $value . '</option>';
+					}
+					${'s_sort_' . $sort_option . '_dir'} .= '</select>';
+				}]]></action>
+			</edit>
+		</open>
+		<open src="language/en/common.php">
+			<edit>
+				<find><![CDATA['TRACKED_PHP_ERROR'	=> 'Tracked PHP errors: %s',]]></find>
+				<action type="after-add"><![CDATA[/* Begin Extended UCP Menu and General lang */
+       'UCP_MAIN'                         => 'Overview',
+       'UCP_MAIN_FRONT'                   => 'Front page',
+       'UCP_MAIN_SUBSCRIPTION'            => 'Manage subscriptions',
+       'UCP_MAIN_BOOKMARKS'               => 'Manage bookmarks',
+       'UCP_MAIN_DRAFTS'                  => 'Manage drafts',
+       'UCP_MAIN_ATTACHMENTS'             => 'Manage attachments',
+
+       'UCP_PROFILE'                      => 'Profile',   
+       'UCP_PROFILE_PROFILE'              => 'Edit profile',   
+       'UCP_PROFILE_SIGNITURE'            => 'Edit signature',   
+       'UCP_PROFILE_AVATAR'               => 'Edit avatar',   
+       'UCP_PROFILE_SETTINGS'             => 'Account settings',   
+
+       'UCP_PREFERENCE'                   => 'Board preferences',
+       'UCP_PREFERENCE_SETTINGS'          => 'Edit global settings',
+       'UCP_PREFERENCE_DEFAULTS'          => 'Edit posting defaults',
+       'UCP_PREFERENCE_OPTIONS'           => 'Edit display options',
+
+       'UCP_MESSAGES'                     => 'Messages',   
+       'UCP_PM_COMPOSE'                   => 'Compose message',   
+       'UCP_PM_DRAFTS'                    => 'Manage drafts',   
+       'UCP_PM_INBOX'                     => 'Inbox',   
+       'UCP_PM_OUTBOX'                    => 'Outbox',   
+       'UCP_PM_SENTBOX'                   => 'Sent',   
+       'UCP_PM_OPTIONS'                   => 'Rules, folders &amp; settings',   
+
+       'UCP_GROUPS'                       => 'Usergroups',   
+       'UCP_GROUPS_MEMBERSHIP'            => 'Edit membership',   
+       'UCP_GROUPS_MANAGE'                => 'Manage groups',   
+
+       'UCP_ZEBRA'                        => 'Friends &amp; Foes',   
+       'UCP_ZEBRA_FRIENDS'                => 'Manage friends',   
+       'UCP_ZEBRA_FOES'                   => 'Manage foes', 
+	   'UCP_APPLY'                        => 'Apply', 
+	   'UCP_PM_DEFAULT_RULE_TAG'          => 'Default action',
+	   'UCP_PM_DEFAULT_RULE'              => 'Do not accept new messages',
+	   'UCP_PM_DEFAULT_RULE_EXPLAIN'      => ' This action will be triggered only if none of the above options is applicable. New messages will be held back until enough space is available.',
+	   'UCP_PM_NEW_MESSAGE'               => 'New Message',
+	   'NO_VOTES_NA'                      => 'N/A',
+	   'POST_TOPIC_NEW'                   => 'New Topic',
+	   'QUICK_REPLY_SHOW_HIDE'            => 'Show/Hide Quick Reply',
+	   'CHARACTERS_COUNT'                 => 'Characters',
+	   'CHARACTERS_COUNT_REM'             => 'Remaining',
+	   'BOOKMARKED_TOPICS_UCP'            => 'Bookmarked Topics',
+	   'ATTACH_EXPLANATION_SORTABLE'      => 'Click to sort',
+	   'ATTACH_FORUM'                     => 'Attachment(s)',
+	   'MCP_DETAILS_LOG'                  => 'Details',
+	   'MCP_DETAIL_U_IP'                  => 'User & IP',
+	   'MCP_MANAG_BAN'                    => 'Ban Management',
+	   
+	   'FORUMLIST_UNAPPROVED'             => 'At least one topic in this forum has not been approved', 
+	   'FORUMLIST_LASTPOST'               => 'View the latest post', 
+	   'TOPICS_POSTS_STATISTICS'          => 'Statistics',
+	   'TOPICS_ROW_REPORTED'              => 'This Topic has been reported',
+	   'TOPICS_ROW_NOT_APPROVED'          => 'This Topic has not been approved',
+	   'MODERATOR_PANEL_GENERAL'          => 'Moderator Panel',
+	   'ADMIN_PANEL_GENERAL'              => 'Administrator Panel',
+	   
+	   'WELCOME_INDEX'                    => 'Welcome',
+	   'FAQ'                              => 'FAQ',
+	   'CAPTION_FAQ'                      => 'Common knowledge place',
+	   'CAPTION_SEARCH'                   => 'Search it up!',
+	   'CAPTION_MEMBERS'                  => 'Looking for someone?',
+	   'MEMBERS_CAP'                      => 'Members',
+	   'CAPTION_UCP'                      => 'Set your preferences',
+	   'UCP_CAP'                          => 'User Control Panel',
+	   'INDEX_CAPTION'                    => 'This is the forum index page',
+	   'VIEWTOPIC_CAP'                    => 'Topic Title',
+	   'CAPTION_VIEWTOPIC'                => 'Topic description',
+	   'MCP_CAPTION'                      => 'This is where you get to use the Super Powers ;-)',
+	   'BOOTSTRAP_ELEMENT'                => 'Bootstrap Elements',
+	   'BOOTSTRAP_ELEMENT_CAPTION'        => 'Forum KickStart Documentation',
+	   'MAIN_FORUM'                       => 'Forum',
+	   'MAIN_MAIN_STUFF'                  => 'The Main stuff',
+	   'MAIN_TRENDS'                      => 'See the trends',
+	   
+	   'MAIN_SEARCH_IT_UP'                => 'Search it up',
+	   'SUB_NO_ICON'                      => 'No Icon here at all',
+	   'EXAMPLE_WITH_ICON'                => 'Example With Icon',
+	   'EXAMPLE_LINK'                     => 'Example Link',
+	   'MAIN_SOCIAL'                      => 'Social',
+	   'SOCIAL_P'                         => 'Chat away ;-)',
+	   
+	   'CONTACT'                          => 'Contact',
+	   'GET_IN_TOUCH'                     => 'Get in touch',
+	   'HANG_AROUND'                      => 'Hang around',
+	   'JOIN_THE_CLUB'                    => 'Join the club',
+	   'MENU'         			          => 'MENU',
+	   'YOU_ARE_HERE'                     => 'You are here',
+	   'IN_FOOTER'         	              => 'In:',
+	   'REPLY'        			          => 'Reply',
+	   
+	   'U_LOGOUT'                         => 'Logout',
+	   
+/* Begin Extended UCP Menu and General lang */]]></action>
+			</edit>
+		</open>
+		<diy-instructions lang="en"><![CDATA[IMPORTANT ! 
+
+#####################################################################
+Log on to Administration Control Panel (ACP)
+
+#####################################################################
+A) Refresh the template and theme :
+
+	1) Navigate to "Styles" Tab.
+	2) Under "Style components " click on "Templates".
+	3) Under "Actions" click on "Refresh" for the BBOOTS style installed.
+	4) in the next screen, click on "Yes" to confirm
+        5) Repeat the steps for the "Themes" tab right under the "Templates" tab
+
+#####################################################################
+B) Purge the cache :
+
+	1) Navigate to General Tab
+	2) look at Purge the cache
+	3) Click on "Run Now" button at right
+	4) in the next screen, click on "Yes" to confirm
+
+#####################################################################
+D) Enjoy it !. don't forget to rate it 5 stars on Theme Forest ;-)]]></diy-instructions>
+	</action-group>
+</mod>

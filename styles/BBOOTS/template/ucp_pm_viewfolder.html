@@ -1,0 +1,235 @@
+<!-- INCLUDE ucp_header.html -->
+
+<!-- IF not PROMPT -->
+	<!-- INCLUDE ucp_pm_message_header.html -->
+<!-- ENDIF -->
+
+<!-- IF PROMPT -->
+	<form id="viewfolder" method="post" action="{S_PM_ACTION}">
+
+		<fieldset class="framed-ucp">
+		<legend>{L_EXPORT_AS_CSV} {L_OPTIONS}</legend>
+
+			 <div class="controls controls-row"> 
+										
+              <label class="control-label" for="delimiter">{L_DELIMITER}:</label>
+                <div class="controls">
+                <input type="text" class="" id="delimiter" name="delimiter" value=",">
+                </div>
+										 
+             <label class="control-label" for="enclosure">{L_ENCLOSURE}:</label>
+                <div class="controls">
+                   <input type="text" class="" id="enclosure" name="enclosure" value="&#034;">
+                </div>
+										
+			 </div>
+			
+		</fieldset>
+
+	<fieldset class="form-actions">
+		<input type="hidden" name="export_option" value="CSV" />
+		<button class="btn" type="submit" name="submit_export" value="{L_EXPORT_FOLDER}" >{L_EXPORT_FOLDER}</button>
+		<button class="btn" type="reset" value="{L_RESET}" name="reset" >{L_RESET}</button>
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+<!-- ELSE -->
+
+	<!-- IF NUM_REMOVED -->
+		<div class="notice">
+			<p>{RULE_REMOVED_MESSAGES}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<!-- IF NUM_NOT_MOVED -->
+		<div class="notice">
+			<p>{NOT_MOVED_MESSAGES}<br />{RELEASE_MESSAGE_INFO}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<!-- IF .messagerow -->
+		
+	<table class="footable table table-striped table-bordered table-white table-primary table-hover">
+		<thead>
+            <tr>
+               <th data-class="expand" class="table-check"><div class="checker"><span><input type="checkbox" class="checkall uniform"></span></div>{L_MARK}</th>
+                <th><!-- IF S_SHOW_RECIPIENTS -->{L_MESSAGE_TO}<!-- ELSE -->From<!-- ENDIF --></th>
+                <th data-hide="phone">{L_SUBJECT}</th>
+           <th data-hide="phone"><!-- IF S_SHOW_RECIPIENTS -->{L_SENT_AT} Date<!-- ELSE -->Date<!-- ENDIF --></th>
+		   </tr>
+        </thead>
+		
+		<tbody>
+		<!-- BEGIN messagerow -->
+		
+		<tr>
+            <td class="table-check"><div class="checker"><span><input id="{messagerow.MESSAGE_ID}" name="marked_msg_id[]" value="{messagerow.MESSAGE_ID}" type="checkbox" class="uniform"><label for="{messagerow.MESSAGE_ID}"></label></span></div></td>
+       
+            <td class="table-fixed-medium"><!-- IF S_SHOW_RECIPIENTS --><i class="icon-user"></i> {messagerow.RECIPIENTS}<!-- ELSE --><i class="icon-user"></i> {messagerow.MESSAGE_AUTHOR_FULL}<!-- ENDIF --></td>
+            <td>
+			<!-- IF messagerow.S_PM_DELETED -->
+							<a href="{messagerow.U_REMOVE_PM}" class="topictitle">{L_DELETE_MESSAGE}</a><br />
+							<span class="error">{L_MESSAGE_REMOVED_FROM_OUTBOX}</span>
+						<!-- ELSE -->
+						
+							<span class="icon-envelope <!-- IF messagerow.PM_CLASS -->{messagerow.PM_CLASS}<!-- ENDIF -->"></span> <a href="{messagerow.U_VIEW_PM}" class="topictitle">{messagerow.SUBJECT}</a>
+						<!-- ENDIF -->
+						<!-- IF messagerow.S_PM_REPORTED --><a href="{messagerow.U_MCP_REPORT}"><i class="icon-exclamation-sign"></i></a><!-- ENDIF --><!-- IF messagerow.ATTACH_ICON_IMG --><i class="icon-paper-clip icon-flip-horizontal" rel="tooltip" data-placement="top" data-original-title="{L_ATTACH_FORUM}"></i> <!-- ENDIF -->
+						<!-- IF messagerow.S_AUTHOR_DELETED -->
+							<br /><small>{L_PM_FROM_REMOVED_AUTHOR}</small>
+						<!-- ENDIF -->
+						<!-- IF S_UNREAD --><!-- IF messagerow.FOLDER --><a href="{messagerow.U_FOLDER}">{messagerow.FOLDER}</a><!-- ELSE -->{L_UNKNOWN_FOLDER}<!-- ENDIF --><!-- ENDIF -->
+			</td>
+            <td><!-- IF S_SHOW_RECIPIENTS --><i class="icon-time"></i> <small>{messagerow.SENT_TIME}</small><!-- ELSE --><i class="icon-time"></i> <small>{messagerow.SENT_TIME}</small><!-- ENDIF --></td>
+        </tr>
+
+		<!-- END messagerow -->
+		</tbody>
+		
+	</table>
+	<!-- ELSE -->
+		<p><strong>
+			<!-- IF S_COMPOSE_PM_VIEW and S_NO_AUTH_SEND_MESSAGE -->
+				<!-- IF S_USER_NEW -->{L_USER_NEW_PERMISSION_DISALLOWED}<!-- ELSE -->{L_NO_AUTH_SEND_MESSAGE}<!-- ENDIF -->
+			<!-- ELSE -->
+				{L_NO_MESSAGES}
+			<!-- ENDIF -->
+		</strong></p>
+	<!-- ENDIF -->
+
+<!-- IF FOLDER_CUR_MESSAGES neq 0 -->
+	<div class="table_options">
+             <div class="pull-left">
+                <div class="btn-group">
+                    <div class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="btn" data-original-title="" title=""><i class="icon-check-empty"></i> <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#" onclick="marklist('viewfolder', 'marked_msg', true); return false;" data-original-title="" title=""><i class="icon-check"></i>{L_MARK_ALL}</a></li>
+                            <li><a href="#" onclick="marklist('viewfolder', 'marked_msg', false); return false;" data-original-title="" title=""><i class="icon-check-empty"></i>{L_UNMARK_ALL}</a></li>
+                          </ul>
+                    </div>
+            </div>
+            <div class="btn-group">
+                 <div class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="btn" data-original-title="" title=""><i class="icon-folder-close"></i> <span class="caret"></span></a>
+                       <ul class="dropdown-menu">
+						<li><a href="{U_UCP_PM_INBOX}" data-original-title="" title=""><i class="icon-download-alt"></i>{L_UCP_PM_INBOX}</a></li>
+                        <li><a href="{U_UCP_PM_SENTBOX}" data-original-title="" title=""><i class="icon-upload-alt"></i>{L_UCP_PM_SENTBOX}</a></li>
+                        <li><a href="{U_UCP_PM_OUTBOX}" data-original-title="" title=""><i class="icon-upload"></i>{L_UCP_PM_OUTBOX}</a></li>
+                       </ul>
+                 </div>
+           </div>
+           </div>
+		 
+	       <div class="pull-right">
+            <div class="pagination pagination-small">
+            <ul>
+                <!-- IF TOTAL_MESSAGES --><li class="active"><a>{TOTAL_MESSAGES}</a></li><!-- ENDIF -->
+	            <li><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a></li>
+            </ul>
+           </div>
+          </div>
+    </div>
+<!-- ENDIF -->
+
+	<div class="space10"></div>
+
+<!-- IF FOLDER_CUR_MESSAGES neq 0 -->
+<fieldset>
+	<div class="row-fluid">
+		<div class="pull-right hidden-phone">
+		
+		<select class="selectpicker" data-width="126px" name="export_option" id="export_option">
+		<option data-icon="icon-download-alt"  value="CSV">{L_EXPORT_AS_CSV}</option>
+		<option data-icon="icon-align-justify" value="CSV_EXCEL">{L_EXPORT_AS_CSV_EXCEL}</option>
+		<option data-icon="icon-columns" value="XML">{L_EXPORT_AS_XML}</option>
+		</select>
+		
+		<button type="submit" name="submit_export" class="btn">{L_GO}</button>
+		</div>
+		
+		<div class="pull-left">
+		<select class="selectpicker" data-width="151px" name="mark_option">
+		{S_MARK_OPTIONS}
+		{S_MOVE_MARKED_OPTIONS}
+		</select> 
+		
+		<button type="submit" name="submit_mark" class="btn">{L_GO}</button>
+		</div>
+	</div>
+
+		<hr />
+	
+	<div class="pull-right">
+    <div class="pagination pagination-small">
+     <ul>
+     <!-- IF TOTAL_MESSAGES or S_VIEW_MESSAGE -->
+	   <!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
+	   <!-- IF PAGE_NUMBER --><!-- IF PAGINATION -->{PAGINATION}<!-- ELSE --><li><a>{PAGE_NUMBER}</a></li><!-- ENDIF --><!-- ENDIF -->
+       <!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
+	 <!-- ENDIF -->
+     </ul>
+    </div>
+   </div>
+</fieldset>
+<!-- ENDIF -->
+	
+		</fieldset> <!--FORMER DOUBLE DIV PANEL AND INNER FOR VIEW FOLDER AND VIEW MESSASGE-->
+
+	<!-- IF FOLDER_CUR_MESSAGES neq 0 -->
+	        <fieldset>
+	                <div class="row-fluid hidden-phone">
+                        <!-- // Column -->
+                        <div class="span12">
+                            <div class="widget-collapsible">
+                                <div class="widget-header-text"> 
+                                <div class="widget-tool"><a title="" data-original-title="" href="javascript:void(0);" data-target="#demo1" data-toggle="collapse" class="btn btn-glyph btn-link widget-toggle collapsed">{L_OPTIONS}</a></div>
+                                </div>
+                                <div style="height: 0px;" class="widget-content collapse" id="demo1">
+                                    <div class="widget-body-text">
+                                        <p>
+										
+										
+	                                      <div class="controls controls-row"> 
+										  <div class="span4"> 
+                                           <label class="control-label" for="bday_day">{L_DISPLAY}:</label>
+                                           <div class="controls">
+                                           <div class="selector">{S_SELECT_SORT_DAYS}</div> 
+                                         </div>
+										  </div>
+	 
+	                                       <div class="span4"> 
+                                           <label class="control-label" for="bday_day">{L_SORT_BY} </label>
+                                           <div class="controls">
+                                            <div class="selector">{S_SELECT_SORT_KEY}</div> 
+                                           </div>
+										     </div>
+											
+											<div class="span4"> 
+                                           <label class="control-label" for="bday_day">{L_SORT_BY}</label>
+                                          <div class="controls">
+										   <div class="input-append">
+                                            <div class="selector">{S_SELECT_SORT_DIR}</div> 
+											<button type="submit" name="sort" value="{L_GO}" class="btn">{L_GO}</button>
+                                          <input type="hidden" name="cur_folder_id" value="{CUR_FOLDER_ID}" />
+										 </div>
+										 </div>
+		                                   
+										 </div>
+										 </div> 
+	                                    
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // Widget --> 
+                        </div>
+                        <!-- // Column --><!-- // Column -->  
+                    </div>
+			</fieldset>
+	<!-- ENDIF -->
+
+	<!-- INCLUDE ucp_pm_message_footer.html -->
+<!-- ENDIF -->
+<!-- INCLUDE ucp_footer.html -->

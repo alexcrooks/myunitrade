@@ -1,0 +1,92 @@
+	
+	</div><!-- page-body id in header -->
+
+</div> <!-- padding_0_40 in header -->
+ </div> <!-- content-forum in header -->
+
+</div> <!-- wrap - corners container in header -->
+
+
+<div class="container">
+  <div class="copyright">
+	<small class="pull-left">
+		<!-- IF TRANSLATION_INFO -->{TRANSLATION_INFO}<!-- ENDIF -->
+		<!-- IF DEBUG_OUTPUT -->{DEBUG_OUTPUT}<!-- ENDIF -->
+	</small>
+	
+	<small class="pull-right">
+		{S_TIMEZONE}
+	</small>
+	
+  </div>
+</div>
+
+<div class="space10"></div> 
+
+<div> 
+	<!-- IF not S_IS_BOT -->{RUN_CRON_TASK}<!-- ENDIF -->
+</div> 
+
+<!-- script asynch loading -->
+
+<!--custom plugin-->
+<script type="text/javascript" src="{T_THEME_PATH}/js/phpbb-boot.js"></script>
+<!--custom plugin-->
+<!-- scroll-up//refer to the overall_footer for options// and tinyscroll.js -->
+<script type="text/javascript" src="{T_THEME_PATH}/js/jquery.tinyscrollbar.min.js"></script>
+<script type="text/javascript" src="{T_THEME_PATH}/js/jquery.scrollUp.js"></script>
+<!-- scroll-up and tinyscroll.js -->
+
+<script>
+$('body').scrollspy({
+    target: '#side-nav'
+});
+</script>
+
+<!-- Lodaing state for buttons -->
+<script>
+$('button[data-loading-text]')
+    .click(function () {
+        var btn = $(this)
+        btn.button('loading')
+        setTimeout(function () {
+            btn.button('reset')
+        }, 3000)
+    });
+</script>
+
+<script>
+ //ScrollUp
+$(function () {
+$.scrollUp({
+scrollName: 'scrollUp', // Element ID
+topDistance: '300', // Distance from top before showing element (px)
+topSpeed: 900, // Speed back to top (ms)
+animation: 'slide', // Fade, slide, none
+animationInSpeed: 400, // Animation in speed (ms)
+animationOutSpeed: 400, // Animation out speed (ms)
+scrollText: 'Scroll to top', // Text for element
+activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+});
+}); 
+</script>
+
+<!-- Tooltip on a attribute -->
+<script>
+    jQuery(function ($) {
+        $("a").tooltip()
+    });
+</script>
+
+<!-- Tooltip Btn grp fix -->
+<script>
+$('.btn-group [title]').tooltip({
+  container: 'body'
+})
+</script>
+<!-- Tooltip Btn grp fix -->
+
+<!-- script asynch loading -->
+
+</body>
+</html>

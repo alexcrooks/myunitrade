@@ -1,0 +1,84 @@
+<!-- INCLUDE ucp_header.html -->
+
+<div class="tab-pane active">
+<h2>{L_TITLE}</h2>
+
+    <div class="alert alert-info fade in">
+	  <button class="close" data-dismiss="alert"><span class="awe-remove-circle"></span></button>
+	  {L_UCP_WELCOME}
+	</div>
+	
+<!-- IF .topicrow -->
+	<div class="side-segment"><h3>{L_IMPORTANT_NEWS}</h3></div>
+	<table class="footable table table-striped table-bordered table-white table-primary table-hover">
+	<thead>
+		<tr>
+			<th data-class="expand"><i class="icon-group"></i> {L_TOPICS}</th>
+			<th data-hide="phone"><i class="icon-comments-alt"></i> {L_LAST_POST}</th>
+		</tr>
+	</thead>
+	<!-- BEGIN topicrow -->
+		<tbody>
+			<tr>
+				<td>
+				 <i class="row-icon" style="background-image: url({topicrow.TOPIC_FOLDER_IMG_SRC}); background-repeat: no-repeat;" title="{topicrow.TOPIC_FOLDER_IMG_ALT}"></i>
+				 <!-- IF topicrow.S_UNREAD --><a href="{topicrow.U_NEWEST_POST}">{NEWEST_POST_IMG}</a> <!-- ENDIF --><a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a><br>
+				 <!-- IF topicrow.PAGINATION --><strong class="pagination"><span>{topicrow.PAGINATION}</span></strong><!-- ENDIF -->
+				 <!-- IF topicrow.ATTACH_ICON_IMG -->{topicrow.ATTACH_ICON_IMG} <!-- ENDIF --><i class="icon-user"></i> <small>{L_POST_BY_AUTHOR} {topicrow.TOPIC_AUTHOR_FULL}</small> <i class="icon-time"></i> <small>{topicrow.FIRST_POST_TIME}</small>
+				</td>
+				<td class="center"><i class="icon-user"></i> {L_POST_BY_AUTHOR} {topicrow.LAST_POST_AUTHOR_FULL}
+				<a rel="tooltip" data-placement="right" data-original-title="{L_FORUMLIST_LASTPOST}" href="{topicrow.U_LAST_POST}"><i class="icon-signout"></i></a> <br /><i class="icon-time"></i> <small>{topicrow.LAST_POST_TIME}</small>
+				</td>
+			</tr>
+		</tbody>
+	<!-- END topicrow -->
+	</table>
+<!-- ENDIF -->
+
+
+	<div class="side-segment"><h3>{L_YOUR_DETAILS}</h3></div>
+   <div class="widget-content"> 
+    <ul class="recent-activity">
+
+        <li class="item"> 
+         <span class="icon red"><i class="icon16 icon-flag"></i></span> 
+          <div class="text">{L_JOINED}: </div> 
+         <span class="recent-detail">{JOINED}</span> 
+        </li> 
+	
+	    <li class="item"> <span class="icon yellow"><i class="icon16 icon-group"></i></span>
+         <span class="text">{L_VISITED}: </span> 
+         <span class="recent-detail">{LAST_VISIT_YOU}</span> 
+        </li> 
+
+        <!-- IF WARNINGS -->
+        <li class="item"><span class="icon yellow"><i class="icon16 icon-bolt"></i></span> 
+         <span class="text">{L_YOUR_WARNINGS}: {WARNING_IMG} [{WARNINGS}]</span> 
+         <span class="recent-detail">2 days ago</span> 
+        </li>
+		<!-- ENDIF -->
+		
+        <li class="item"> <span class="icon blue"><i class="icon16 icon-book"></i></span>
+         <span class="text">{L_TOTAL_POSTS}: <!-- IF POSTS_PCT -->{POSTS}<!-- IF S_DISPLAY_SEARCH --> | <a href="{U_SEARCH_USER}">{L_SEARCH_YOUR_POSTS}</a><!-- ENDIF --> <!-- ELSE -->{POSTS} <!-- ENDIF --> </span> 
+         <span class="recent-detail">({POSTS_DAY} / {POSTS_PCT})</span> 
+        </li> 
+		
+		<!-- IF ACTIVE_FORUM != '' -->
+        <li class="item"> <span class="icon green"><i class="icon16 icon-refresh"></i></span>
+         <span class="text">{L_ACTIVE_IN_FORUM}: <a href="{U_ACTIVE_FORUM}">{ACTIVE_FORUM}</a> </span> 
+         <span class="recent-detail">({ACTIVE_FORUM_POSTS} / {ACTIVE_FORUM_PCT})</span> 
+        </li> 
+        <!-- ENDIF -->
+		
+		<!-- IF ACTIVE_TOPIC != '' -->
+        <li class="item last-child"> <span class="icon orange"><i class="icon16 icon-comments"></i></span>
+         <span class="text">{L_ACTIVE_IN_TOPIC}: <a href="{U_ACTIVE_TOPIC}">{ACTIVE_TOPIC}</a> </span> 
+         <span class="recent-detail">({ACTIVE_TOPIC_POSTS} / {ACTIVE_TOPIC_PCT})</span> 
+        </li> 
+		<!-- ENDIF -->
+    </ul> 
+   </div>
+	
+</div>
+
+<!-- INCLUDE ucp_footer.html -->

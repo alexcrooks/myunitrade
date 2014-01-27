@@ -1,0 +1,37 @@
+<!-- INCLUDE overall_header.html -->
+  <div class="side-segment"><h3>{L_FAQ_TITLE}</h3></div>
+ <div class="tab-content">
+  <div id="tab_1_6" class="tab-pane row-fluid active">
+   <div class="row-fluid">
+    <div class="span12">
+	   <div class="tab-content">
+	   <div id="f{faq_block.S_ROW_COUNT}r{faq_block.faq_row.S_ROW_COUNT}" class="tab-pane active">
+	   <!-- BEGIN faq_block -->
+       <h4> {faq_block.BLOCK_TITLE} </h4>
+	    <div id="accordion1" class="accordion in collapse" style="height: auto;">
+		  <!-- BEGIN faq_row -->
+		<div class="accordion-group">
+         <div class="accordion-heading">
+           <a href="#f{faq_block.S_ROW_COUNT}r{faq_block.faq_row.S_ROW_COUNT}" data-parent="#accordion1" data-toggle="collapse" class="accordion-toggle collapsed" data-original-title="" title="">
+              {faq_block.faq_row.FAQ_QUESTION}
+           </a>
+         </div>
+			
+         <div style="height: 0px;" class="accordion-body collapse" id="f{faq_block.S_ROW_COUNT}r{faq_block.faq_row.S_ROW_COUNT}">
+           <div class="accordion-inner">
+             {faq_block.faq_row.FAQ_ANSWER}
+           </div>
+         </div>
+       </div>
+	    <!-- END faq_row -->
+		</div>
+		<!-- END faq_block -->
+	   </div>
+	   </div>
+    </div>
+	 
+  </div>
+  </div>
+</div>
+<!-- INCLUDE jumpbox.html -->
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,105 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- INCLUDE forumlist_body.html -->
+
+<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
+  <div class="row-fluid">
+   <div class="side-segment"><h3><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a><!-- IF S_REGISTER_ENABLED -->&nbsp; &bull; &nbsp;<a href="{U_REGISTER}">{L_REGISTER}</a><!-- ENDIF --></h3></div>
+    <form method="post" action="{S_LOGIN_ACTION}">
+	 <div class="well">
+		 
+		 <fieldset>
+		 <div class="span12">
+		 
+		  <div class="span6">
+		  
+			<label for="username" class="control-label">{L_USERNAME}:</label>
+            <div class="input-icon left">
+	         <i class="icon-user"></i>
+			<input class="span8" type="text" name="username" id="username" placeholder="{L_USERNAME}">
+			</div>
+			
+			<label for="password" class="control-label">{L_PASSWORD}:</label>
+            <div class="input-icon left">
+	         <i class="icon-key"></i>
+			 <input class="span8" type="password" name="password" id="password" placeholder="{L_PASSWORD}">
+			</div>
+			<!-- IF S_AUTOLOGIN_ENABLED -->
+			<div class="controls controls-row"> 
+			 <div class="radio"><input type="checkbox" name="autologin" id="autologin"><label for="autologin">{L_LOG_ME_IN}</label></div>
+			</div>
+			<!-- ENDIF -->
+			<button type="submit" class="btn start" id="load" name="login" value="{L_LOGIN}" data-loading-text="Logging-in... <i class='icon-spin icon-spinner icon-large icon-white'></i>">{L_LOGIN}</button>
+			{S_LOGIN_REDIRECT}
+		  </div>
+		 
+		<div class="pull-right hidden-phone">
+		<div class="admin-header-head">
+		    <div class="user-fxicon">
+				<i class="custom-pacman icon-flip-horizontal"></i>
+		    </div>
+		</div>
+		</div>
+		 
+		 </div>
+		 </fieldset>
+		
+     </div>
+	</form>
+  </div>
+<!-- ENDIF -->
+
+<!-- Promo Box
+
+  <section class="promo-box">
+	<div class="row-fluid">
+	
+	<div class="pull-left">
+	<h2>About Us</h2>
+	<p>BBOOTS&#8482; Is The First And Only Responsive phpBB&reg; Unofficial HTML5/CSS3 Theme. Based On Bootstrap Framework Is Sure To AMAZE The phpBB Fan Club. </p> 
+	<p>It’s Clean And Crisp Design Looks AWESOME Across All Browsers And Devices. Granted. <i aria-hidden="true" class="custom-firefox"></i> <i aria-hidden="true" class="custom-chrome"></i> <i aria-hidden="true" class="custom-IE"></i> <i aria-hidden="true" class="custom-opera"></i> <i aria-hidden="true" class="custom-safari"></i></p>
+	</div>
+		<div class="promo-icon">
+		    <i class="custom-screen screen-pos"></i> 
+			<i class="custom-tablet laptop-pos"></i> 
+			<i class="custom-mobile mobile-pos"></i>
+		</div>
+	</div>
+  </section>
+  
+  <div class="space10"></div>
+	<div class="space10"></div>
+	  <div class="space10"></div>
+	  
+ Promo Box  -->
+
+
+	
+<div class="row-fluid">
+
+<div class="span12 statistics">
+
+<div class="span6">
+<!-- IF S_DISPLAY_ONLINE_LIST -->
+	<!-- IF U_VIEWONLINE -->
+	<div class="side-segment"><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3></div><!-- ELSE --><div class="side-segment"><h3>{L_WHO_IS_ONLINE}</h3></div>
+	<!-- ENDIF -->
+	<p>{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
+	<!-- IF LEGEND --><br /><small>{L_LEGEND}: {LEGEND}</small><!-- ENDIF --></p>
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_BIRTHDAY_LIST and BIRTHDAY_LIST -->
+	<div class="side-segment"><h3>{L_BIRTHDAYS}</h3></div>
+	<p><!-- IF BIRTHDAY_LIST -->{L_CONGRATULATIONS}: <strong>{BIRTHDAY_LIST}</strong><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF --></p>
+<!-- ENDIF -->
+</div>
+<div class="span6">
+<!-- IF NEWEST_USER -->
+	<div class="side-segment"><h3>{L_STATISTICS}</h3></div>
+	<p>{TOTAL_POSTS} &bull; {TOTAL_TOPICS} &bull; {TOTAL_USERS} &bull; {NEWEST_USER}</p>
+<!-- ENDIF -->
+</div>
+</div>
+
+</div>
+<!-- INCLUDE overall_footer.html -->

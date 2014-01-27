@@ -1,0 +1,35 @@
+<!-- INCLUDE overall_header.html -->
+<form action="{S_PROFILE_ACTION}" method="post" id="remind">
+<div class="row-fluid">
+	<div class="side-segment"><h3>{L_SEND_PASSWORD}</h3></div>
+<div class="well">
+  <fieldset>
+	<div class="control-group"> 
+	   <label class="control-label" for="username">{L_USERNAME}:</label>
+	<div class="controls controls-row"> 
+      <div class="input-icon left">
+	   <i class="icon-user"></i>
+	   <input type="text" name="username" id="username" size="25" placeholder="Ex:Jhon Doe" class="span12">
+	  </div>
+	</div> 
+	</div>	
+	
+	<div class="control-group"> 
+	   <label class="control-label" for="email">{L_EMAIL_ADDRESS}:</label>
+	<div class="controls controls-row"> 
+      <div class="input-icon left">
+	   <i class="custom-at"></i>
+	   <input type="text" name="email" id="email" size="25" maxlength="100" placeholder="Ex:Jhon@mail.com" class="span12">
+	  </div>
+	</div> 
+	</div>
+
+	{S_HIDDEN_FIELDS}
+		<input type="submit" name="submit" id="submit" class="btn" value="{L_SUBMIT}" tabindex="2" />
+		<input type="reset" value="{L_RESET}" name="reset" class="btn" />
+	{S_FORM_TOKEN}
+  </fieldset>
+</div>
+</div>
+</form>
+<!-- INCLUDE overall_footer.html -->

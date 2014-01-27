@@ -1,0 +1,133 @@
+<!-- INCLUDE ucp_header.html -->
+
+
+<form id="ucp" method="post" action="{S_UCP_ACTION}">
+
+	<fieldset class="framed-ucp">
+      <legend>{L_TITLE}</legend>
+	
+	<!-- IF ERROR_MESSAGE --><p class="error">{ERROR_MESSAGE}</p><!-- ENDIF -->
+	<!-- IF NOTIFICATION_MESSAGE --><p class="error">{NOTIFICATION_MESSAGE}</p><!-- ENDIF -->
+
+	<fieldset class="framed-ucp">
+      <legend>{L_DEFINED_RULES}</legend>
+	
+	<ul class="things-to-do">
+	<!-- BEGIN rule -->
+	<li><p>
+		<strong>{L_IF}</strong> {rule.CHECK} <em>{rule.RULE}</em> <!-- IF rule.STRING --><strong>{rule.STRING}</strong> | <!-- ENDIF -->{rule.ACTION}<!-- IF rule.FOLDER -->: {rule.FOLDER}<!-- ENDIF -->
+	    <button class="btn btn-mini" name="delete_rule[{rule.RULE_ID}]" type="submit" title="{L_DELETE_RULE}"><i class="icon-remove"></i></button>
+	</p>
+	</li>
+	<!-- BEGINELSE -->
+		<li><p>{L_NO_RULES_DEFINED}</p></li>
+	<!-- END rule -->
+	</ul>
+	
+	
+	
+	</fieldset>
+
+	<div class="space10"></div>
+	
+	<fieldset class="framed-ucp">
+      <legend>{L_ADD_NEW_RULE}</legend>
+
+  <!-- IF S_CHECK_DEFINED -->
+		
+			<div class="input-prepend input-append">
+     <span class="add-on">{L_IF}:</span>
+			<div class="input-append">
+				<!-- IF S_CHECK_SELECT --><select class="selectpicker" name="check_option" id="check_option">{S_CHECK_OPTIONS}</select> <button class="btn" name="next" type="submit">{L_NEXT_STEP}</button><!-- ELSE --><span class="add-on">{CHECK_CURRENT}</span><input type="hidden" name="check_option" value="{CHECK_OPTION}" /><!-- ENDIF -->
+
+	<!-- ENDIF -->
+
+	<!-- IF S_RULE_DEFINED -->
+			<!-- IF S_RULE_SELECT --><select class="selectpicker" name="rule_option" id="rule_option">{S_RULE_OPTIONS}</select> <button class="btn" name="back[rule]" type="submit">{L_PREVIOUS_STEP}</button> <button class="btn" name="next" type="submit">{L_NEXT_STEP}</button><!-- ELSE --><span class="add-on">{RULE_CURRENT}</span><input type="hidden" name="rule_option" value="{RULE_OPTION}" /><!-- ENDIF -->
+		
+	<!-- ENDIF -->
+
+	<!-- IF S_COND_DEFINED -->
+		<!-- IF S_COND_SELECT or COND_CURRENT -->
+
+					<!-- IF S_COND_SELECT -->
+						<!-- IF S_TEXT_CONDITION -->
+						    <input class="span4" name="rule_string" value="{CURRENT_STRING}" type="text" maxlength="50">
+						<!-- ELSEIF S_USER_CONDITION -->
+							 <input class="span4" name="rule_string" value="{CURRENT_STRING}" type="text" maxlength="50">&nbsp;<span>[ <a href="{U_FIND_USERNAME}" onclick="find_username(this.href); return false;">{L_FIND_USERNAME}</a> ]</span>
+						<!-- ELSEIF S_GROUP_CONDITION -->
+							<input type="hidden" name="rule_string" value="{CURRENT_STRING}" /><!-- IF S_GROUP_OPTIONS --><select class="selectpicker" name="rule_group_id">{S_GROUP_OPTIONS}</select><!-- ELSE -->{L_NO_GROUPS}<!-- ENDIF -->
+						<!-- ENDIF -->
+						<button class="btn" name="back[cond]" type="submit">{L_PREVIOUS_STEP}</button> <button class="btn" name="next" type="submit">{L_NEXT_STEP}</button>
+
+					<!-- ELSE -->
+						<span class="add-on">{COND_CURRENT}</span><input type="hidden" name="rule_string" value="{CURRENT_STRING}" /><input type="hidden" name="rule_user_id" value="{CURRENT_USER_ID}" /><input type="hidden" name="rule_group_id" value="{CURRENT_GROUP_ID}" />
+					<!-- ENDIF -->
+				</div>
+		<!-- ENDIF -->
+		<input type="hidden" name="cond_option" value="{COND_OPTION}" />
+	<!-- ENDIF -->
+
+
+	<!-- IF NONE_CONDITION --><input type="hidden" name="cond_option" value="none" /><!-- ENDIF -->
+
+	<!-- IF S_ACTION_DEFINED -->
+			<!-- IF S_ACTION_SELECT --> <div class="input-append"><select class="selectpicker" name="action_option">{S_ACTION_OPTIONS}</select><button class="btn" name="back[action]" type="submit">{L_PREVIOUS_STEP}</button> <button class="btn btn-success" name="add_rule" type="submit"><i class="icon-check icon-white"></i> {L_ADD_RULE}</button><!-- ELSE --><span class="add-on">{ACTION_CURRENT}</span><input type="hidden" name="action_option" value="{ACTION_OPTION}" /></div><!-- ENDIF -->
+	
+		</div>
+	<!-- ENDIF -->
+
+	</fieldset>
+	
+<div class="space10"></div>
+	
+	<fieldset class="framed-ucp">
+      <legend>{L_FOLDER_OPTIONS}</legend>
+
+	<!-- IF not S_MAX_FOLDER_ZERO -->
+	
+	    <label class="control-label" for="foldername">{L_ADD_FOLDER}:</label>
+		<!-- IF S_MAX_FOLDER_REACHED -->{L_MAX_FOLDER_REACHED}<!-- ELSE --><div class="input-append"><input type="text" name="foldername" id="foldername" maxlength="30"> <button type="submit" name="addfolder" class="btn">{L_ADD}</button></div><!-- ENDIF -->
+	
+	<!-- IF S_FOLDER_OPTIONS --><hr class="dashed" /><!-- ENDIF -->
+	<!-- ENDIF -->
+
+	<!-- IF S_FOLDER_OPTIONS -->
+		
+			<label for="rename_folder_id" class="control-label">{L_RENAME_FOLDER}:</label>
+		  <div class="input-prepend">
+			<select class="selectpicker" name="rename_folder_id" id="rename_folder_id">{S_FOLDER_OPTIONS}</select>
+			<div class="input-append input-prepend" style="margin-bottom:0px;">
+			<input class="span7" type="text" name="new_folder_name" id="new_folder_name" maxlength="30" placeholder="{L_NEW_FOLDER_NAME}" />  <button type="submit" name="rename_folder" class="btn">{L_RENAME}</button>
+		  </div></div>
+		<hr class="dashed" />
+		
+		    
+			<label for="remove_folder_id" class="control-label">{L_REMOVE_FOLDER}:</label>
+			<select class="selectpicker" name="remove_folder_id" id="remove_folder_id">{S_FOLDER_OPTIONS}</select>
+			<input type="radio" name="remove_action" id="remove_action1" value="1" checked="checked" /><label for="remove_action1" class="control-label"> {L_MOVE_DELETED_MESSAGES_TO}:</label> <select class="selectpicker" name="move_to">{S_TO_FOLDER_OPTIONS}</select>
+			<input type="radio" name="remove_action" id="remove_action2" value="2" /><label for="remove_action2" class="control-label">{L_DELETE_MESSAGES_IN_FOLDER}</label>
+	     	<button type="submit" name="remove_folder" class="btn">{L_UCP_APPLY}</button>
+	       
+	<!-- ENDIF -->
+
+	<hr class="dashed" />
+
+	
+		<label for="full_action1" class="control-label">{L_IF_FOLDER_FULL}:</label>
+		<input type="radio" name="full_action" id="full_action3" value="3"{S_HOLD_CHECKED} /><label for="full_action3" style="white-space:normal;">{L_UCP_PM_DEFAULT_RULE} <span class="label">{L_UCP_PM_DEFAULT_RULE_TAG}</span></label>
+		<input type="radio" name="full_action" id="full_action1" value="1"{S_DELETE_CHECKED} /><label for="full_action1">{L_DELETE_OLDEST_MESSAGES}</label>
+		<input type="radio" name="full_action" id="full_action2" value="2"{S_MOVE_CHECKED} /><label for="full_action2">{L_MOVE_TO_FOLDER}:</label> <select class="selectpicker" name="full_move_to">{S_FULL_FOLDER_OPTIONS}</select>
+ <div class="space10"></div>
+	<div class="control-group">
+       <span class="label label-important">{L_DEFAULT_ACTION}:</span>
+          <span>{L_UCP_PM_DEFAULT_RULE_EXPLAIN}</span>                      
+      </div>
+	  <button type="submit" name="fullfolder" class="btn">{L_CHANGE}</button>
+	</fieldset>
+
+	{S_FORM_TOKEN}
+</fieldset>
+</form>
+
+<!-- INCLUDE ucp_footer.html -->

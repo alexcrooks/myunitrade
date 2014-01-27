@@ -1,0 +1,160 @@
+<!-- INCLUDE mcp_header.html -->
+
+<!-- DEFINE $CUSTOM_FIELDSET_CLASS = 'forum-selection2' -->
+
+<h2><a href="{U_VIEW_FORUM}">{L_FORUM}: {FORUM_NAME}</a></h2>
+
+<form method="post" id="mcp" action="{S_MCP_ACTION}">
+<div class="tab-pane active">
+
+<div class="row-fluid">
+   <div class="pull-left">
+    <!-- INCLUDE jumpbox.html -->
+   </div>
+
+	<!-- IF PAGINATION or TOTAL_TOPICS -->
+		<div class="pull-right" style="margin-top:29px;">
+	     <div class="pagination pagination-small">
+            <ul>
+	         <!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
+	         <!-- IF TOTAL_TOPICS --><li class="active"><a>{TOTAL_TOPICS}</a></li><!-- ENDIF -->
+             <!-- IF PAGE_NUMBER --><!-- IF PAGINATION --><li><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a></li> {PAGINATION}<!-- ELSE --> <li><a>{PAGE_NUMBER}</a></li><!-- ENDIF --><!-- ENDIF -->
+	         <!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
+	        </ul>
+           </div>  	
+	    </div>
+	<!-- ENDIF -->
+</div>
+
+	<!-- IF .topicrow -->
+	<table class="footable table table-striped table-bordered table-white table-primary table-hover">
+	
+	<thead>
+		<tr>
+		<!-- IF not S_MERGE_SELECT -->
+		    <th><i class="icon-check"></i> {L_MARK}</th>
+		<!-- ENDIF -->
+			<th data-class="expand"><i class="icon-list-ol"></i> {L_TOPICS}</th>
+			<th data-hide="phone"><i class="icon-bar-chart"></i> {L_REPLIES}</th>
+			<th data-hide="phone"><i class="icon-comments-alt"></i> {L_LAST_POST}</th>
+		</tr>
+	</thead>		
+		
+	<tbody>
+		<!-- BEGIN topicrow -->
+
+		<tr class="<!-- IF topicrow.S_TOPIC_REPORTED --> reported<!-- ENDIF -->">
+			   <!-- IF not S_MERGE_SELECT -->
+			   <td class="large60"><div class="text-center"><span><!-- IF not topicrow.S_MOVED_TOPIC --><input type="checkbox" name="topic_id_list[]" id="{topicrow.TOPIC_ID}" value="{topicrow.TOPIC_ID}"<!-- IF topicrow.S_TOPIC_CHECKED --> checked="checked"<!-- ENDIF -->><label for="{topicrow.TOPIC_ID}"><!-- ELSE -->&nbsp;</label><!-- ENDIF --></span></div></td>
+				<!-- ENDIF -->
+				<td>
+				 <!-- IF topicrow.TOPIC_ICON_IMG --><i class="topic-icon" style="background-image: url({T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}); background-repeat: no-repeat;" title="{topicrow.TOPIC_FOLDER_IMG_ALT}"></i><!-- ENDIF -->
+					<i class="row-icon" style="background-image: url({topicrow.TOPIC_FOLDER_IMG_SRC}); background-repeat: no-repeat;" title="{topicrow.TOPIC_FOLDER_IMG_ALT}"></i>
+					<!-- IF topicrow.S_SELECT_TOPIC --><a href="{topicrow.U_SELECT_TOPIC}" class="topictitle">[ {L_SELECT_MERGE} ]</a>&nbsp;&nbsp; <!-- ENDIF -->
+					<a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a>
+					<!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED --><a href="{topicrow.U_MCP_QUEUE}">{topicrow.UNAPPROVED_IMG}</a> <!-- ENDIF -->
+					<!-- IF topicrow.S_TOPIC_REPORTED --><a href="{topicrow.U_MCP_REPORT}" title="{L_TOPICS_ROW_REPORTED}"><i class="icon-exclamation-sign"></i></a><!-- ENDIF -->
+					<!-- IF topicrow.S_MOVED_TOPIC and S_CAN_DELETE -->&nbsp;<a href="{topicrow.U_DELETE_TOPIC}" class="topictitle">[ {L_DELETE_SHADOW_TOPIC} ]</a><!-- ENDIF -->
+					<br />
+					<!-- IF topicrow.PAGINATION --><strong class="pagination"><span>{topicrow.PAGINATION}</span></strong><!-- ENDIF -->
+					<!-- IF topicrow.ATTACH_ICON_IMG -->{topicrow.ATTACH_ICON_IMG} <!-- ENDIF -->{L_POST_BY_AUTHOR} {topicrow.TOPIC_AUTHOR_FULL} <i class="icon-time"></i> <small> {topicrow.FIRST_POST_TIME}</small>
+				</td>
+				<td class="center">{topicrow.REPLIES} {L_REPLIES}</td>
+				<td class="center"><i class="icon-user"></i> {L_POST_BY_AUTHOR} {topicrow.LAST_POST_AUTHOR_FULL} <br /><i class="icon-time"></i> <small>{topicrow.LAST_POST_TIME}</small></td>
+	
+		</tr>
+		<!-- END topicrow -->
+			</tbody>
+	</table>
+	<!-- ELSE -->
+	<div class="alert alert-info"><i class="icon-info-sign"></i>{L_NO_TOPICS}</div>
+	<!-- ENDIF -->
+
+<div class="space10"></div>
+		
+ <div class="row-fluid">
+	
+   <div class="pull-left" style="margin-top:-15px;">
+    <fieldset>
+	 <!-- IF not S_MERGE_SELECT -->
+	 <div class="input-append">
+	 <select class="selectpicker" data-container="body" name="action">
+		<option value="" selected="selected">{L_SELECT_ACTION}</option>
+		<!-- IF S_CAN_DELETE --><option value="delete_topic">{L_DELETE}</option><!-- ENDIF -->
+		<!-- IF S_CAN_MERGE --><option value="merge_topics">{L_MERGE}</option><!-- ENDIF -->
+		<!-- IF S_CAN_MOVE --><option value="move">{L_MOVE}</option><!-- ENDIF -->
+		<!-- IF S_CAN_FORK --><option value="fork">{L_FORK}</option><!-- ENDIF -->
+		<!-- IF S_CAN_LOCK --><option value="lock">{L_LOCK}</option><option value="unlock">{L_UNLOCK}</option><!-- ENDIF -->
+		<!-- IF S_CAN_SYNC --><option value="resync">{L_RESYNC}</option><!-- ENDIF -->
+		<!-- IF S_CAN_MAKE_NORMAL --><option value="make_normal">{L_MAKE_NORMAL}</option><!-- ENDIF -->
+		<!-- IF S_CAN_MAKE_STICKY --><option value="make_sticky">{L_MAKE_STICKY}</option><!-- ENDIF -->
+		<!-- IF S_CAN_MAKE_ANNOUNCE -->
+			<option value="make_announce">{L_MAKE_ANNOUNCE}</option>
+			<option value="make_global">{L_MAKE_GLOBAL}</option>
+	    <!-- ENDIF -->
+	 </select>
+	<a href="javascript:;" onclick="marklist('mcp', 'topic_id_list', true); return false;" class="btn" title="" data-original-title="{L_MARK_ALL}"><i class="icon-check"></i></a>
+	<a href="javascript:;" onclick="marklist('mcp', 'topic_id_list', false); return false;" class="btn" title="" data-original-title="{L_UNMARK_ALL}"><i class="icon-check-empty"></i></a>
+	<button class="btn" type="submit" value="{L_SUBMIT}" >{L_SUBMIT}</button>
+   </div>
+	<!-- ENDIF -->
+	{S_FORM_TOKEN}
+    </fieldset>
+   </div>
+   
+   <div class="row-fluid hidden-phone">
+                        <!-- // Column -->
+                        <div class="span12" style="margin-top:-20px;">
+                            <div class="widget-collapsible">
+                                <div class="widget-header-text"> 
+                                <div class="widget-tool"><a title="" data-original-title="" href="javascript:void(0);" data-target="#demo1" data-toggle="collapse" class="btn btn-glyph btn-link widget-toggle collapsed">Options</a></div>
+                                </div>
+                                <div style="height: 0px;" class="widget-content collapse" id="demo1">
+                               <div class="widget-body-text">
+                               <p>
+	                               <div class="controls controls-row"> 
+										<div class="span3"> 
+                                      <label class="control-label" for="bday_day">{L_DISPLAY}:</label>
+                                      <div class="controls">
+									   <div class="input-append">
+                                     <div class="selector">{S_SELECT_SORT_DAYS}</div> 
+									  </div>
+                                   </div>
+								</div>
+	 
+	                           <div class="span3"> 
+                                    <label class="control-label" for="bday_day">{L_SORT_BY} </label>
+                                     <div class="controls">
+									  <div class="input-append">
+                                     <div class="selector">{S_SELECT_SORT_KEY}</div> 
+									  </div>
+                                    </div>
+								</div>
+											
+								<div class="span3"> 
+                                   <label class="control-label" for="bday_day">{L_SORT_BY}</label>
+                                  <div class="controls">
+								   <div class="input-append">
+                                   <div class="selector">{S_SELECT_SORT_DIR}</div> 
+                                  <button class="btn" name="sort" type="submit">{L_GO}</button>
+								  </div>
+								  </div>       
+								</div>
+								
+								 </div> 
+                               </p>
+                            </div>
+                          </div>
+                       </div>
+                    <!-- // Widget --> 
+                </div>
+           <!-- // Column --><!-- // Column -->  
+        </div>
+   
+   
+   
+ </div>
+</div>
+</form>
+
+<!-- INCLUDE mcp_footer.html -->

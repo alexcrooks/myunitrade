@@ -1,0 +1,37 @@
+<form method="post" action="{U_QR_ACTION}">
+    
+        <div class="well well-qr widget-collapsible"><!-- // Widget --> 
+           
+		   <div class="widget-header clickable" data-toggle="collapse" data-target="#target-col">
+             <h4><i class="icon-edit"></i> {L_QUICKREPLY}</h4>
+             <div class="widget-tool"><a class="btn btn-glyph btn-link widget-toggle icon-arrow-down" href="javascript:void(0);" data-original-title="Show/Hide" title="" id="target-shown"></a></div>
+           </div>
+             <div id="target-col" class="widget-content collapse">
+                <div class="widget-content">
+                   				
+		   <div class="space10"></div>
+					
+				<label class="control-label" for="subject">{L_SUBJECT}:</label>
+                    <div class="controls">
+                      <input type="text" name="subject" id="subject" class="form form-full span9" value="{SUBJECT}">
+                    </div>
+					 
+                <label class="control-label" for="{L_MESSAGE}">{L_MESSAGE}:</label>  
+				  <div class="controls">
+					<textarea class="span11" name="message" id="{L_MESSAGE}" rows="3"  placeholder="Enter your message..."></textarea>
+                 </div>
+				
+                </div>
+                <div class="widget-footer">
+                    <div class="btn-toolbar padding-side"> 
+					{S_FORM_TOKEN}
+					{QR_HIDDEN_FIELDS}
+					<button type="submit" class="btn start" id="load" name="post" autocomplete="off" data-loading-text="loading...<i class='icon-spin icon-spinner icon-large icon-white'></i>">{L_SUBMIT}</button>
+					<button type="submit" class="btn start" id="load" name="full_editor" autocomplete="off" data-loading-text="loading...<i class='icon-spin icon-spinner icon-large icon-white'></i>">{L_FULL_EDITOR}</button>
+					</div>
+                </div>
+             </div>
+        </div>
+         <!-- // Widget --> 
+   
+</form>

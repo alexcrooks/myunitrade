@@ -1,0 +1,192 @@
+<!-- INCLUDE mcp_header.html -->
+
+<!-- IF S_SHOW_UNAPPROVED -->
+
+	<form id="mcp_queue" method="post" action="{S_MCP_QUEUE_ACTION}">
+
+	<div class="tab-pane active">
+	<h2>{PAGE_TITLE}</h2>
+
+		<div class="side-segment"><h3>{L_LATEST_UNAPPROVED}</h3></div>
+		<!-- IF S_HAS_UNAPPROVED_POSTS --><p>{L_UNAPPROVED_TOTAL}</p><!-- ENDIF -->
+
+		<!-- IF .unapproved -->			
+    <table class="footable table table-striped table-bordered table-white table-primary table-hover">
+	
+	<thead>
+		<tr>
+		    <th class="table-check"><i class="icon-check-empty"></i> <div class="checker"><span><input type="checkbox" class="checkall uniform"></span></div>{L_MARK}</th>
+			<th data-class="expand"><i class="icon-bar-chart"></i> {L_VIEW_DETAILS}</th>
+			<th data-hide="phone"><i class="icon-bar-chart"></i> {L_TOPIC} &amp; {L_FORUM}</th>
+		</tr>
+	</thead>		
+		
+	<tbody>
+			<!-- BEGIN unapproved -->
+	    <tr>
+	            <td class="table-check"><div class="checker"><span><input type="checkbox" name="post_id_list[]" id="{unapproved.POST_ID}"><label for="{unapproved.POST_ID}"></label></span></div></td>
+				<td>
+				<a href="{unapproved.U_POST_DETAILS}" class="topictitle">{unapproved.SUBJECT}</a> {unapproved.ATTACH_ICON_IMG}<br />
+				<i class="icon-user"></i> {L_POST_BY_AUTHOR} {unapproved.AUTHOR_FULL} &#45; <i class="icon-time"></i> <small>{unapproved.POST_TIME}</small>
+				</td>
+			
+				<td class="center">
+				{L_TOPIC}: <a href="{unapproved.U_TOPIC}">{unapproved.TOPIC_TITLE}</a> [<a href="{unapproved.U_MCP_TOPIC}">{L_MODERATE}</a>]<br />
+				{L_FORUM}: <!-- IF unapproved.U_FORUM --><a href="{unapproved.U_FORUM}">{unapproved.FORUM_NAME}</a><!-- ELSE -->{unapproved.FORUM_NAME}<!-- ENDIF --><!-- IF unapproved.U_MCP_FORUM --> [<a href="{unapproved.U_MCP_FORUM}">{L_MODERATE}</a>]<!-- ENDIF -->
+				</td>
+		</tr>		
+			<!-- END unapproved -->
+			</tbody>
+		
+	</table>
+		<!-- ELSE -->
+	<div class="alert alert-info fade in">
+	  <button class="close" data-dismiss="alert"><span class="awe-remove-circle"></span></button>
+	  {L_UNAPPROVED_POSTS_ZERO_TOTAL}
+	</div>
+		<!-- ENDIF -->
+
+	{S_FORM_TOKEN}
+	</div>
+
+<!-- IF .unapproved -->
+	<div class="row-fluid">
+	<div class="pull-left">
+	<fieldset>
+	{S_HIDDEN_FIELDS}
+	<div class="btn-group">
+	 <button class="btn" type="submit" name="action[approve]" id="action[approve]" title="" data-original-title="{L_APPROVE}"><i class="icon-thumbs-up"></i></button>
+	 <button class="btn" type="submit" name="action[disapprove]" id="action[disapprove]" title="" data-original-title="{L_DISAPPROVE}"><i class="icon-thumbs-down"></i></button>
+	</div>
+	
+	<div class="btn-group">
+	<a href="javascript:;" onclick="marklist('mcp_queue', 'post_id_list', true); return false;" class="btn" title="" data-original-title="{L_MARK_ALL}"><i class="icon-check"></i></a>
+	<a href="javascript:;" onclick="marklist('mcp_queue', 'post_id_list', false); return false;" class="btn" title="" data-original-title="{L_UNMARK_ALL}"><i class="icon-check-empty"></i></a>
+	</div>
+    </fieldset>
+	</div>
+    
+	</div>
+	<!-- ENDIF -->
+		</form>
+<!-- ENDIF -->
+
+<!-- IF S_SHOW_REPORTS -->
+
+		<div class="side-segment"><h3>{L_LATEST_REPORTED}</h3></div>
+		<!-- IF S_HAS_REPORTS --><p>{L_REPORTS_TOTAL}</p><!-- ENDIF -->
+
+		<!-- IF .report -->
+	<table class="footable table table-striped table-bordered table-white table-primary table-hover">
+	
+	<thead>
+		<tr>
+			<th data-class="expand"><i class="icon-bar-chart"></i> {L_VIEW_DETAILS}</th>
+			<th data-hide="phone"><i class="icon-bar-chart"></i> {L_REPORTER} &amp; {L_FORUM}</th>
+		</tr>
+	</thead>		
+		
+	<tbody>
+			<!-- BEGIN report -->
+			 <tr>
+				<td>
+				<a href="{report.U_POST_DETAILS}#reports" class="topictitle">{report.SUBJECT}</a> {report.ATTACH_ICON_IMG}<br />
+				<i class="icon-user"></i> {L_POST_BY_AUTHOR} {report.AUTHOR_FULL} &#45; <i class="icon-time"></i> <small> {report.POST_TIME}</small>
+				</td>
+			
+				<td class="center">
+				{L_REPORTED} {L_POST_BY_AUTHOR} {report.REPORTER_FULL} {L_REPORTED_ON_DATE} <small> {report.REPORT_TIME}</small> <br />
+				{L_FORUM}: <a href="{report.U_FORUM}">{report.FORUM_NAME}</a>
+				</td>
+		     </tr>	
+			<!-- END report -->
+				</tbody>
+	</table>
+		<!-- ELSE -->
+	<div class="alert alert-info fade in">
+	  <button class="close" data-dismiss="alert"><span class="awe-remove-circle"></span></button>
+	 {L_REPORTS_ZERO_TOTAL}
+	</div>
+		<!-- ENDIF -->
+
+	
+<!-- ENDIF -->
+
+<!-- IF S_SHOW_PM_REPORTS -->
+
+		<div class="side-segment"><h3>{L_LATEST_REPORTED_PMS}</h3></div>
+		<!-- IF S_HAS_PM_REPORTS --><p>{L_PM_REPORTS_TOTAL}</p><!-- ENDIF -->
+
+		<!-- IF .pm_report -->
+	<table class="footable table table-striped table-bordered table-white table-primary table-hover">
+	
+	<thead>
+		<tr>
+			<th data-class="expand"><i class="icon-bar-chart"></i> {L_VIEW_DETAILS}</th>
+			<th data-hide="phone"><i class="icon-bar-chart"></i> {L_REPORTER}</th>
+		</tr>
+	</thead>		
+		
+	<tbody>
+
+			<!-- BEGIN pm_report -->
+			<tr>
+				<td>
+				<a href="{pm_report.U_PM_DETAILS}" class="topictitle">{pm_report.PM_SUBJECT}</a> {pm_report.ATTACH_ICON_IMG}<br />
+				<i class="icon-user"></i> {L_MESSAGE_BY_AUTHOR} {pm_report.PM_AUTHOR_FULL} {L_MESSAGE_TO} {pm_report.RECIPIENTS}<br />
+				<i class="icon-time"></i> <small> {pm_report.PM_TIME}</small>
+				</td>
+			
+				<td class="center">
+				{L_REPORTED} {L_POST_BY_AUTHOR} {pm_report.REPORTER_FULL} {L_REPORTED_ON_DATE} <small>{pm_report.REPORT_TIME}</small>
+				</td>
+		     </tr>	
+			<!-- END pm_report -->
+					</tbody>
+	</table>
+		<!-- ELSE -->
+	<div class="alert alert-info fade in">
+	  <button class="close" data-dismiss="alert"><span class="awe-remove-circle"></span></button>
+	 {L_PM_REPORTS_ZERO_TOTAL}
+	</div>
+		<!-- ENDIF -->
+
+
+<!-- ENDIF -->
+
+<!-- IF S_SHOW_LOGS -->
+
+		<div class="side-segment"><h3>{L_LATEST_LOGS}</h3></div>
+
+	<table class="footable table table-striped table-bordered table-white table-primary table-hover">
+		<thead>
+		<tr>
+			<th data-class="expand"><i class="icon-bar-chart"></i> {L_ACTION}</th>
+			<th data-hide="phone"><i class="icon-user"></i> {L_MCP_DETAIL_U_IP}</th>
+			<th data-hide="phone" class="large12"><i class="icon-search"></i> {L_MCP_DETAILS_LOG}</th>
+			<th data-hide="phone"><i class="icon-time"></i> {L_TIME}</th>
+		</tr>
+		</thead>
+		<tbody>
+		
+	<!-- BEGIN log -->
+		<tr>
+			<td>{log.ACTION}</td>
+			<td>{log.USERNAME} {log.IP}</td>
+			<td >
+			<!-- IF log.U_VIEW_TOPIC --><a href="{log.U_VIEW_TOPIC}" title="{L_VIEW_TOPIC}">{L_VIEW_TOPIC}</a><!-- ENDIF --><br>
+			<!-- IF log.U_VIEWLOGS --><a href="{log.U_VIEWLOGS}">{L_VIEW_TOPIC_LOGS}</a><!-- ENDIF -->
+			</td>
+			<td><small>{log.TIME}</small></td>
+		</tr>
+	<!-- BEGINELSE -->
+		<tr>
+			<td colspan="0">{L_NO_ENTRIES}</td>
+		</tr>
+	<!-- END log -->
+		</tbody>
+		</table>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE mcp_footer.html -->

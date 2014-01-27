@@ -1,0 +1,120 @@
+<!-- INCLUDE mcp_header.html -->
+
+<form method="post" id="mcp" action="{U_POST_ACTION}">
+
+<h2>{L_WARNED_USERS}</h2>
+
+<div class="tab-pane active">
+
+	<p>{L_WARNED_USERS_EXPLAIN}</p>
+
+	<!-- IF .user -->
+	<div class="row-fluid">
+		<div class="pull-right">
+	     <div class="pagination pagination-small">
+            <ul>
+	         <!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
+	         <!-- IF TOTAL_USERS --><li class="active"><a>{TOTAL_USERS}</a></li><!-- ENDIF -->
+             <!-- IF PAGE_NUMBER --><!-- IF PAGINATION --><li><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a></li> {PAGINATION}<!-- ELSE --> <li><a>{PAGE_NUMBER}</a></li><!-- ENDIF --><!-- ENDIF -->
+	         <!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
+	        </ul>
+           </div>  	
+	    </div>
+	</div>
+		 
+		<table class="footable table table-striped table-bordered table-white table-primary table-hover">
+		<thead>
+			<tr>
+				<th data-class="expand">{L_USERNAME}</th>
+				<th data-hide="phone">{L_WARNINGS}</th>
+				<th data-hide="phone">{L_LATEST_WARNING_TIME}</th>
+			</tr>
+		</thead>
+		<tbody>
+
+		<!-- BEGIN user -->
+			<tr>
+				<td>{user.USERNAME_FULL}</td>
+				<td>{user.WARNINGS} [<a href="{user.U_NOTES}">{L_VIEW_NOTES}</a>]</td>
+				<td>{user.WARNING_TIME}</td>
+			</tr>
+		<!-- END user -->
+		</tbody>
+		</table>
+    <div class="row-fluid">
+		<div class="pull-right">
+	     <div class="pagination pagination-small">
+            <ul>
+	         <!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
+	         <!-- IF TOTAL_USERS --><li class="active"><a>{TOTAL_USERS}</a></li><!-- ENDIF -->
+             <!-- IF PAGE_NUMBER --><!-- IF PAGINATION --><li><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a></li> {PAGINATION}<!-- ELSE --> <li><a>{PAGE_NUMBER}</a></li><!-- ENDIF --><!-- ENDIF -->
+	         <!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
+	        </ul>
+           </div>  	
+	    </div>
+    </div>
+	
+
+		<div class="row-fluid hidden-phone">
+                        <!-- // Column -->
+                        <div class="span12">
+                            <div class="widget-collapsible">
+                                <div class="widget-header-text"> 
+                                <div class="widget-tool"><a title="" data-original-title="" href="javascript:void(0);" data-target="#demo1" data-toggle="collapse" class="btn btn-glyph btn-link widget-toggle collapsed">{L_OPTIONS}</a></div>
+                                </div>
+                                <div style="height: 0px;" class="widget-content collapse" id="demo1">
+                                    <div class="widget-body-text">
+										<fieldset>
+	                                      <div class="controls controls-row"> 
+										  <div class="span4"> 
+                                           <label class="control-label" for="bday_day">{L_DISPLAY_POSTS}:</label>
+                                           <div class="controls">
+                                           <div class="selector">{S_SELECT_SORT_DAYS}</div> 
+                                         </div>
+										  </div>
+	 
+	                                       <div class="span4"> 
+                                           <label class="control-label" for="bday_day">{L_SORT_BY} </label>
+                                           <div class="controls">
+                                            <div class="selector">{S_SELECT_SORT_KEY}</div> 
+                                           </div>
+										     </div>
+											
+											<div class="span4"> 
+                                           <label class="control-label" for="bday_day">{L_SORT_BY}</label>
+                                          <div class="controls">
+										   <div class="input-append">
+                                            <div class="selector">{S_SELECT_SORT_DIR}</div> 
+                                          <button class="btn" name="sort" type="submit">{L_GO}</button>
+	                                     
+										 </div>
+										 </div>
+		                                   
+										 </div>
+										 
+										 </div> 
+
+	                                    </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // Widget --> 
+                        </div>
+                        <!-- // Column --><!-- // Column -->  
+                    </div>
+	
+	
+
+	<!-- ELSE -->
+	<div class="alert alert-info fade in">
+	  <button class="close" data-dismiss="alert"><span class="awe-remove-circle"></span></button>
+	  {L_WARNINGS_ZERO_TOTAL}
+	</div>
+	<!-- ENDIF -->
+
+{S_FORM_TOKEN}
+</div>
+
+</form>
+
+<!-- INCLUDE mcp_footer.html -->

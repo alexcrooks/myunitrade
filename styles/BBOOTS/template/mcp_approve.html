@@ -1,0 +1,52 @@
+<!-- INCLUDE overall_header.html -->
+<div class="row-fluid">
+<form id="confirm" action="{S_CONFIRM_ACTION}" method="post">
+<div class="well">
+	{S_FORM_TOKEN}
+
+		<h2>{MESSAGE_TITLE}</h2>
+		<!-- IF ADDITIONAL_MSG -->{ADDITIONAL_MSG}<!-- ENDIF -->
+
+		<fieldset>
+		<!-- IF S_NOTIFY_POSTER -->
+		<div class="control-group">
+         	<div class="controls controls-row"> 
+              <input type="checkbox" name="notify_poster" id="notify_poster" checked="checked"><label for="notify_poster"><!-- IF S_APPROVE -->{L_NOTIFY_POSTER_APPROVAL}<!-- ELSE -->{L_NOTIFY_POSTER_DISAPPROVAL}<!-- ENDIF --></label> 
+	         </div> 
+	    </div>
+		<!-- ENDIF -->
+
+		<!-- IF not S_APPROVE -->
+		 <div class="control-group"> 
+	            <label class="control-label" for="reason_id">{L_DISAPPROVE_REASON}:</label>
+         	<div class="controls controls-row"> 
+               <div class="selector">  
+			   <select class="selectpicker" name="reason_id">
+					<!-- BEGIN reason --><option value="{reason.ID}"<!-- IF reason.S_SELECTED --> selected="selected"<!-- ENDIF -->>{reason.DESCRIPTION}</option><!-- END reason -->
+			   </select>
+			   </div>
+	         </div> 
+	    </div>
+			
+		<div class="control-group"> 
+	          <label class="control-label" for="reason">{L_MORE_INFO}:</label><span class="help-block">{L_CAN_LEAVE_BLANK}</span>
+	        <div class="controls controls-row"> 
+              <textarea placeholder="{L_MORE_INFO}...{L_CAN_LEAVE_BLANK}" rows="2"  name="reason" id="reason" class="span12">{REASON}</textarea>
+	         </div> 
+	    </div>
+			
+		<!-- ENDIF -->
+			<strong>{MESSAGE_TEXT}</strong>
+		</fieldset>
+
+		<fieldset class="form-actions">
+			{S_HIDDEN_FIELDS}
+			<input type="submit" name="confirm" value="{YES_VALUE}" class="btn" />
+			<input type="submit" name="cancel" value="{L_NO}" class="btn" />
+		</fieldset>
+
+</div>
+
+</form>
+</div>
+<!-- INCLUDE overall_footer.html -->

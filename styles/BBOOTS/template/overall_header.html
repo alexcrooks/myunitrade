@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
+<head>
+<meta charset="{S_CONTENT_ENCODING}">
+<meta name="author" content="SiteSplat | www.sitesplat.com">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Set the viewport width to device width for mobile -->
+<meta name="Description" content="The Online University Hub" /> <!-- Set Your forum description here inside the "" tag -->
+<meta name="Keywords" content="myunitrade, university, university forum, textbooks, student marketplace, students, student forum, university of calgary, uofc, university of british columbia, ubc" /> <!-- Set Your forum keywords here inside the "" tag and make sure they are separated by a comma -->
+<meta name="application-name" content="BBOOTS"/><!-- WIN8 Tiles setup -->
+<meta name="msapplication-TileColor" content="#ffffff"/><!-- WIN8 Tiles setup -->
+{META}
+<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
+
+<!-- IF S_ENABLE_FEEDS -->
+	<!-- IF S_ENABLE_FEEDS_OVERALL --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {SITENAME}" href="{U_FEED}" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_NEWS --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_NEWS}" href="{U_FEED}?mode=news" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_FORUMS --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_ALL_FORUMS}" href="{U_FEED}?mode=forums" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_TOPICS --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_TOPICS_NEW}" href="{U_FEED}?mode=topics" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_TOPICS_ACTIVE --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_TOPICS_ACTIVE}" href="{U_FEED}?mode=topics_active" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_FORUM and S_FORUM_ID --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FORUM} - {FORUM_NAME}" href="{U_FEED}?f={S_FORUM_ID}" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_TOPIC and S_TOPIC_ID --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_TOPIC} - {TOPIC_TITLE}" href="{U_FEED}?f={S_FORUM_ID}&amp;t={S_TOPIC_ID}" /><!-- ENDIF -->
+<!-- ENDIF -->
+
+<!--
+	phpBB style name: BBOOTS @SiteSplat.com
+-->
+
+<script type="text/javascript">
+// <![CDATA[
+	var jump_page = '{LA_JUMP_PAGE}:';
+	var on_page = '{ON_PAGE}';
+	var per_page = '{PER_PAGE}';
+	var base_url = '{A_BASE_URL}';
+	var style_cookie = 'phpBBstyle';
+	var style_cookie_settings = '{A_COOKIE_SETTINGS}';
+	var onload_functions = new Array();
+	var onunload_functions = new Array();
+
+	/**
+	* Find a member
+	*/
+	function find_username(url)
+	{
+		popup(url, 760, 570, '_usersearch');
+		return false;
+	}
+
+	/**
+	* New function for handling multiple calls to window.onload and window.unload by pentapenguin
+	*/
+	window.onload = function()
+	{
+		for (var i = 0; i < onload_functions.length; i++)
+		{
+			eval(onload_functions[i]);
+		}
+	};
+
+	window.onunload = function()
+	{
+		for (var i = 0; i < onunload_functions.length; i++)
+		{
+			eval(onunload_functions[i]);
+		}
+	};
+
+// ]]>
+</script>
+
+<!-- CSS files start here-->
+<link href="{T_STYLESHEET_LINK}" rel="stylesheet" type="text/css" >
+<link href="{T_THEME_PATH}/print.css" rel="stylesheet" type="text/css" media="print" title="printonly" >
+<!-- CSS files -->
+
+<!-- google free font used for the foum content -->
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
+<!-- google free font used for the foum content -->
+
+<!-- bootstrap.css essential  -->
+<link href="{T_THEME_PATH}/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" >
+<!-- responsive css stylesheet  -->
+<link href="{T_THEME_PATH}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" >
+<!-- bootstrap.css  -->
+
+<!-- Footable CSS files -->
+<link href="{T_THEME_PATH}/footable/css/footable.core.css" rel="stylesheet" type="text/css" >
+<!-- Footable CSS files -->
+
+<!-- FontAwesome CSS files -->
+<link href="{T_THEME_PATH}/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" >
+<!-- FontAwesome CSS files -->
+
+<!-- Custom Font CSS files -->
+<link href="{T_THEME_PATH}/custom-phpbb/style.css" rel="stylesheet" type="text/css" >
+<link href="{T_THEME_PATH}/bootstrap/css/bootstrap-select.css" rel="stylesheet" type="text/css" >
+<!-- Custom Font CSS files -->
+
+
+<!-- Scripts start here after the jquery.js -->
+
+<!-- Google CDN jQuery with fallback to local -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write(unescape('%3Cscript src="{T_THEME_PATH}/js/jquery.min.js"%3E%3C/script%3E'))</script>
+
+<!--bootstrap essential-->
+<script type="text/javascript" src="{T_THEME_PATH}/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="{T_THEME_PATH}/bootstrap/js/bootstrap-select.js"></script>
+<!--bootstrap essential-->
+
+<!-- Footable essential -->
+<script type="text/javascript" src="{T_THEME_PATH}/footable/js/footable.js"></script>
+<!-- Footable essential -->
+
+<script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/forum_fn.js"></script>
+
+
+</head>
+
+
+<body id="phpbb" class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">
+
+<div id="wrap" class="corners container">
+  <!-- start content -->
+  <div id="content-forum">
+    <div class="padding_0_40">
+
+	<aside id="social-top">
+		<div class="pull-right">
+			<!--<a title="Google+" data-original-title="" href="#1"><i class="icon-google-plus-sign icon-large google-plus-color"></i></a>
+			<a title="Github" data-original-title="" href="#2"><i class="icon-github-sign icon-large github-color"> </i></a>
+			<a title="Pinterest" data-original-title="" href="#4"><i class="icon-pinterest-sign icon-large pinterest-color"> </i></a>
+			<a title="Facebook" data-original-title="" href="#5"><i class="icon-facebook-sign icon-large facebook-color"> </i></a>
+		    <a title="Twitter" data-original-title="" href="#6"><i class="icon-twitter-sign icon-large twitter-color"> </i></a>
+			<a title="rss" data-original-title="" href="{U_FEED}"><i class="icon-rss-sign icon-large rss-color"> </i></a>-->
+		</div>
+    </aside>
+	
+	<header class="header"> <!-- Header block -->
+	
+		<div class="topArea">
+			                 <!-- Logo block -->
+		 <div class="leftArea">
+		   <div class="logo-transition">
+			<a class="logo" href="{U_INDEX}" title=""><span>M</span>Y<span>U</span>NI<span>T</span>RADE</a>
+		   </div>
+			<p class="site-info">The Online University Hub <i class="icon-umbrella icon-large"></i></p>
+			<div class="clearfix"></div>
+		 </div>              <!-- Logo block -->
+						  
+	<nav class="mainnav"><!-- Main navigation block -->
+	  <ul>
+		<li class="nav-icon">
+			<a href="{U_INDEX}">{L_HOME} <span class="has-sub"><i class="icon-home"></i></span></a>
+			<p>{L_MAIN_MAIN_STUFF}</p>
+		 <ul class="submenu">
+			<li><a href="{U_ELEMENTS}"><i class="icon-magic"></i> {L_BOOTSTRAP_ELEMENT}</a><span></span></li>
+			<!-- IF S_USER_LOGGED_IN --><li><a href="{U_PROFILE}"><i class=" icon-dashboard"></i> {L_PROFILE}</a><span></span></li><!-- ENDIF -->
+			<li><a href="{U_FAQ}"><i class="icon-question-sign"></i> {L_FAQ}</a><span></span></li>
+            <!-- IF S_DISPLAY_MEMBERLIST --><li><a href="{U_MEMBERLIST}"><i class="icon-user"></i> {L_MEMBERLIST}</a><span></span></li><!-- ENDIF -->
+			<!-- IF U_TEAM --><li><a href="{U_TEAM}"><i class="icon-group"></i> {L_THE_TEAM}</a></li><!-- ENDIF -->
+	     </ul>
+		</li>
+
+		<li class="nav-icon">
+			<a href="#">{L_MAIN_FORUM} <span class="has-sub"><i class="icon-comments"></i></span></a>
+			<p>{L_MAIN_TRENDS}</p>
+		<ul class="submenu">
+		<!-- IF S_DISPLAY_SEARCH or (S_USER_LOGGED_IN and not S_IS_BOT) -->
+	    <!-- IF S_DISPLAY_SEARCH -->
+        <li><a href="{U_SEARCH_UNANSWERED}"><i class="icon-search"></i> {L_SEARCH_UNANSWERED}</a><span></span></li>
+        <!-- IF S_LOAD_UNREADS -->
+		 <li><a href="{U_SEARCH_UNREAD}"><i class="icon-comment-alt"></i> {L_SEARCH_UNREAD}</a><span></span></li>
+		<!-- ENDIF -->
+	    <!-- IF S_USER_LOGGED_IN -->
+        <li><a href="{U_SEARCH_NEW}"><i class="icon-thumbs-up"></i> {L_SEARCH_NEW}</a><span></span></li>
+		<!-- ENDIF -->
+		<li><a href="{U_SEARCH_ACTIVE_TOPICS}"><i class="icon-star"></i> {L_SEARCH_ACTIVE_TOPICS}</a><span></span></li>
+					   
+		<!-- ENDIF -->
+	    <!-- ENDIF -->
+		</ul>
+		</li>
+										
+		<li class="nav-icon">
+			<a href="#">{L_SEARCH} <span class="has-sub"><i class="icon-search icon-flip-horizontal"></i></span></a>
+			<p>{L_MAIN_SEARCH_IT_UP}</p>
+		<ul class="submenu">
+			<li><a href="{U_SEARCH}"><i class="icon-search icon-flip-horizontal"></i> {L_SEARCH_ADV}</a><span></span></li>
+								
+			<!-- IF not S_IS_BOT and S_USER_LOGGED_IN -->
+			 <!-- IF S_DISPLAY_SEARCH --> 
+			<li><a href="{U_SEARCH_SELF}"><i class="icon-comments"></i> {L_SEARCH_SELF}</a><span></span></li>
+			<!-- ENDIF -->
+			<!-- ENDIF -->
+								
+	        <!-- IF not S_IS_BOT and U_MARK_FORUMS -->
+			<li><a href="{U_MARK_FORUMS}"><i class="icon-check"></i> {L_MARK_FORUMS_READ}</a><span></span></li>
+	        <!-- ENDIF -->
+			<li><a href="#"> {L_SUB_NO_ICON}</a><span></span></li>
+			<li><a href="#"> {L_SUB_NO_ICON}</a><span></span></li>
+		</ul>
+		</li>
+
+		<!-- IF not S_IS_BOT and S_USER_LOGGED_IN -->
+						
+		<li class="nav-icon">
+			<a href="#">{L_MAIN_SOCIAL} <span class="has-sub"><i class="icon-retweet"></i></span></a>
+			<p>{L_SOCIAL_P}</p>
+		</li>
+						
+		<li class="nav-icon">
+			<a href="#">{L_CONTACT} <span class="has-sub"><i class="icon-rocket"></i></span></a>
+			<p>{L_GET_IN_TOUCH}</p>
+		</li>
+		<!-- ENDIF -->
+						
+		<!-- IF not S_USER_LOGGED_IN -->
+		<li class="nav-icon">
+			<a href="{U_LOGIN_LOGOUT}">{L_LOGIN} <span class="has-sub"><i class="icon-signin"></i></span></a>
+			<p>{L_HANG_AROUND}</p>
+		</li>
+		<!-- ENDIF -->
+					 
+		<!-- IF not S_IS_BOT -->
+	    <!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED and not (S_SHOW_COPPA or S_REGISTRATION) -->
+	    <li class="nav-icon">
+			<a href="{U_REGISTER}">{L_REGISTER} <span class="has-sub"><i class="icon-thumbs-up"></i></span></a>
+			<p>{L_JOIN_THE_CLUB}</p>
+		</li>
+	    <!-- ENDIF -->
+		<!-- ENDIF -->
+	  </ul>
+		<div id="navBtn" class="" data-toggle="collapse" data-target=".nav-collapse">{L_MENU}<i class="icon  icon-list"></i></div>
+	</nav> <!-- Main navigation block -->
+		
+      <!-- Everything you want hidden at 940px or less, place within here -->
+     <div class="nav-collapse collapse">
+      <!-- .nav, .navbar-search, .navbar-form, etc -->
+	  <nav class="mainnav-mob"> <!-- MOBILE Navigation block -->
+    	 <ul class="submenu">
+		    
+			<!-- IF not S_IS_BOT -->
+	          <!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED and not (S_SHOW_COPPA or S_REGISTRATION) -->
+	          <li><a href="{U_REGISTER}"><i class="icon-plus"></i> {L_REGISTER}</a></li>
+	          <!-- ENDIF -->
+		    <!-- ENDIF -->
+
+			<!-- IF not S_USER_LOGGED_IN -->
+			  <li><a href="{U_LOGIN_LOGOUT}"><i class="icon-signin"></i> {L_LOGIN}</a></li>
+			<!-- ENDIF -->
+			  <li><a href="{U_ELEMENTS}"><i class="icon-magic"></i> {L_BOOTSTRAP_ELEMENT}</a></li>
+			 <!-- IF S_USER_LOGGED_IN -->
+			  <li><a href="{U_PROFILE}"><i class=" icon-dashboard"></i> {L_PROFILE}</a></li>
+			<!-- ENDIF -->
+			  <li><a href="{U_FAQ}"><i class="icon-question-sign"></i> {L_FAQ}</a></li>
+            <!-- IF S_DISPLAY_MEMBERLIST -->
+	          <li><a href="{U_MEMBERLIST}"><i class="icon-user"></i> {L_MEMBERLIST}</a></li>
+			<!-- ENDIF -->
+			<!-- IF not S_USER_LOGGED_IN -->
+			<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-original-title="" title="">Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-original-title="" title="">{L_EXAMPLE_LINK}</a></li>
+                        <li><a href="#" data-original-title="" title="">{L_EXAMPLE_LINK}</a></li>
+                        <li><a href="#" data-original-title="" title="">{L_EXAMPLE_LINK}</a></li>
+                        <li class="divider"></li>
+                        <li class="nav-header">EXAMPLE CATEGORY</li>
+                        <li><a href="#" data-original-title="" title="">{L_EXAMPLE_LINK}</a></li>
+                        <li><a href="#" data-original-title="" title="">{L_EXAMPLE_LINK}k</a></li>
+                    </ul>
+             </li>
+			  <li><a href="{U_SEARCH}"><i class="icon-search icon-flip-horizontal"></i> {L_SEARCH_ADV}</a></li>
+		 	  <!-- IF S_USER_LOGGED_IN --><li><a href="{U_PROFILE}"><i class=" icon-dashboard"></i> {L_PROFILE}</a></li><!-- ENDIF -->
+			  <li><a href="{U_FAQ}"><i class="icon-question-sign"></i> {L_FAQ}</a></li>
+              <!-- IF S_DISPLAY_MEMBERLIST --><li><a href="{U_MEMBERLIST}"><i class="icon-user"></i> {L_MEMBERLIST}</a></li><!-- ENDIF -->
+			  <!-- IF U_TEAM --><li><a href="{U_TEAM}"><i class="icon-group"></i> {L_THE_TEAM}</a></li><!-- ENDIF -->
+			<!-- ENDIF -->
+		 </ul>
+       </nav> <!-- MOBILE Navigation block -->
+      </div>
+		</div>
+	</header> <!-- Header block -->
+
+	<div id="top-line"></div>
+    <div id="breadcrumb">
+		<div class="index-header-head row-fluid">
+                   
+			<div class="fxicon">
+				<!-- IF SCRIPT_NAME == "faq" --><i class="icon-question-sign"></i>
+				<!-- ELSEIF SCRIPT_NAME == "search" --><i class="icon-search"></i>
+				<!-- ELSEIF SCRIPT_NAME == "memberlist" --><i class="icon-group"></i>
+				<!-- ELSEIF SCRIPT_NAME == "ucp" --><i class="icon-cogs"></i>
+				<!-- ELSEIF SCRIPT_NAME == "viewtopic" --><i class="icon-comments-alt"></i>
+				<!-- ELSEIF SCRIPT_NAME == "mcp" --><i class="icon-cogs"></i>
+				<!-- ELSEIF SCRIPT_NAME == "elements" --><i class="icon-cogs"></i>
+				<!-- ELSE -->
+				<i class="icon-home"></i>
+				<!-- ENDIF -->
+		    </div>
+                    
+	        <ul class="index-pos">
+            <!-- IF SCRIPT_NAME == "faq" --><li class="index-title"><h1>{L_FAQ}</h1></li><li class="index-sub">{L_CAPTION_FAQ}</li>
+	        <!-- ELSEIF SCRIPT_NAME == "search" --><li class="index-title"><h1>{L_SEARCH}</h1></li><li class="index-sub">{L_CAPTION_SEARCH}</li>
+	        <!-- ELSEIF SCRIPT_NAME == "memberlist" --><li class="index-title"><h1>{L_MEMBERS_CAP}</h1></li><li class="index-sub">{L_CAPTION_MEMBERS}</li>
+	        <!-- ELSEIF SCRIPT_NAME == "ucp" --><li class="index-title"><h1>{L_UCP_CAP}</h1></li><li class="index-sub">{L_CAPTION_UCP}</li>
+	        <!-- ELSEIF SCRIPT_NAME == "viewtopic" --><li class="index-title"><h1>{L_VIEWTOPIC_CAP}</h1></li><li class="index-sub">{L_CAPTION_VIEWTOPIC}</li>
+			<!-- ELSEIF SCRIPT_NAME == "mcp" --><li class="index-title"><h1>{L_MCP}</h1></li><li class="index-sub">{L_MCP_CAPTION}</li>
+			<!-- ELSEIF SCRIPT_NAME == "elements" --><li class="index-title"><h1>{L_BOOTSTRAP_ELEMENT}</h1></li><li class="index-sub">{L_BOOTSTRAP_ELEMENT_CAPTION}</li>
+			<!-- ELSE -->
+				 <li class="index-title"><h1>{L_HOME}</h1></li>
+                <li class="index-sub">{L_INDEX_CAPTION}</li>
+			<!-- ENDIF -->
+            </ul> 
+ 
+       <!-- SEARCH block -->   
+	   <!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
+		<div class="search-pos pull-right">
+          <div class="search-box"> 
+          <form action="{U_SEARCH}" method="get">
+           <fieldset> 
+            <input name="keywords" id="keywords" type="text" maxlength="128" title="{L_SEARCH_KEYWORDS}" placeholder="{L_SEARCH}" value="<!-- IF SEARCH_WORDS-->{SEARCH_WORDS}<!-- ELSE -->{L_SEARCH_MINI}<!-- ENDIF -->" onclick="if(this.value=='{LA_SEARCH_MINI}')this.value='';" onblur="if(this.value=='')this.value='{LA_SEARCH_MINI}';">
+           </fieldset> 
+          </form> 
+         </div>	
+        </div>  
+		<!-- ENDIF -->	
+       
+	   </div>
+    </div> 
+	
+	<!-- IF S_USER_LOGGED_IN -->
+	<div class="crumbs">
+		<ul class="sub-crumb hidden-phone"> 
+		    <li><i class="icon-home"></i> <a href="{U_INDEX}" accesskey="h">{L_INDEX}</a> <span class="divider"></span></li>
+		    <li class="active"> <!-- BEGIN navlinks --> <i class="icon-angle-right"></i> <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a><!-- END navlinks -->&nbsp;<i class="icon-long-arrow-left"></i> {L_YOU_ARE_HERE}</li>
+		</ul>
+		
+		<ul class="top-menu">
+			<li class="dropdown">
+					<a data-toggle="dropdown" class="user-menu">{USER_AVATAR}<span>{L_WELCOME_INDEX}, {CURRENT_USERNAME}<i class="caret"></i></span></a>
+				<ul class="dropdown-menu">
+				   <li><a title="" href="{U_UCP_PROFILE}"><i class="icon-user"></i>{L_UCP_PROFILE}</a></li>
+				   <li><a title="" href="{U_UCP_PM}"><i class="icon-inbox"></i>{L_UCP_MESSAGES}<span class="badge badge-info"><!-- IF S_DISPLAY_PM and S_USER_UNREAD_PRIVMSG --> {S_USER_UNREAD_PRIVMSG}<!-- ELSE -->{S_USER_NEW_PRIVMSG}<!-- ENDIF --></span></a></li>
+				   <li><a title="" href="{U_UCP_PROFILE_SETTINGS}"><i class="icon-cog"></i>{L_UCP_PROFILE_SETTINGS}</a></li>
+	               <!-- IF U_ACP --><li><a title="" href="{U_ACP}"><i class="icon-user-md"></i>{L_ADMIN_PANEL_GENERAL}</a></li><!-- ENDIF -->
+	               <!-- IF U_MCP --><li><a href="{U_MCP}"><i class="icon-legal"></i>{L_MODERATOR_PANEL_GENERAL}</a></li><!-- ENDIF -->
+				   <!-- IF U_RESTORE_PERMISSIONS --><li><a href="{U_RESTORE_PERMISSIONS}"><i class="icon-random"></i> {L_RESTORE_PERMISSIONS}</a></li><!-- ENDIF -->
+				  <li><a title="" href="{U_LOGOUT}"><i class="icon-off"></i>{L_LOGOUT}</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<!-- ENDIF -->
+	
+		<!-- Lower Breadcrumb block -->
+		    <ul class="sub-breadcrumb">
+               <li class="pull-left">
+				 <span class="time">{CURRENT_TIME}</span>
+               </li> 
+               <li class="pull-right hidden-phone">
+                 <!-- IF S_USER_LOGGED_IN --><span class="time">{LAST_VISIT_DATE}</span><!-- ENDIF -->
+               </li>   
+            </ul>
+	    <!-- Lower Breadcrumb block --> 
+	
+	<div id="page-body">
+
+		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
+		<div class="alert alert-info fade in">
+			<button data-dismiss="alert" class="close"><span class="awe-remove-circle"></span></button>
+			<i class="icon-info-sign"></i> <strong>{L_INFORMATION}:</strong> {L_BOARD_DISABLED}
+		</div>
+		<!-- ENDIF -->

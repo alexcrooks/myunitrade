@@ -1,0 +1,32 @@
+<div class="widget-body tab-pane" id="posting-attach-body-html">
+
+	<p>{L_ADD_ATTACHMENT_EXPLAIN}</p>
+	
+	<fieldset>
+
+	<div class="control-group">
+     <label class="control-label" for="fileupload">{L_FILENAME}:</label>
+       <div class="fileupload fileupload-new" data-provides="fileupload">
+         <div class="input-append">
+             <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div>
+	          <span class="btn btn-file"><span class="fileupload-new">Browse</span>
+	          <span class="fileupload-exists">Change</span>
+	          <input type="file" name="fileupload" id="fileupload" maxlength="{FILESIZE}" value="" />
+	       </span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+		   <button type="submit" name="add_file" value="{L_ADD_FILE}" class="btn" onclick="upload = true;" >{L_ADD_FILE}</button>
+         </div>
+       </div>
+      <span class="help-inline"></span>
+    </div>
+	
+	<div class="control-group"> 
+	   <label class="control-label" for="filecomment">{L_FILE_COMMENT}:</label>
+	<div class="controls controls-row"> 
+	  <textarea placeholder="You can comment your file" rows="1" name="filecomment" id="filecomment" class="span5">{FILE_COMMENT}</textarea>
+	</div> 
+	</div>
+	
+	
+	</fieldset>
+
+</div>

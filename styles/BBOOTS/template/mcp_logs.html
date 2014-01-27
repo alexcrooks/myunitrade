@@ -1,0 +1,155 @@
+<!-- INCLUDE mcp_header.html -->
+
+<h2>{L_TITLE}</h2>
+
+<form method="post" id="mcp" action="{U_POST_ACTION}">
+
+<div class="row-fluid">
+	<div class="pull-left">
+	<div class="input-append hidden-phone input-icon left">  
+       <i class="icon-search"></i>
+	   <input type="text" class="medium" size="" name="keywords" id="search_keywords" placeholder="{L_SEARCH_KEYWORDS}:"><button type="submit" class="btn black">{L_SEARCH}</button>
+    </div>
+	</div>
+	
+	   <div class="pull-right">
+	     <div class="pagination pagination-small">
+            <ul>
+	         <!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
+	         <!-- IF TOTAL --><li class="active"><a>{TOTAL}</a></li><!-- ENDIF -->
+             <!-- IF PAGE_NUMBER --><!-- IF PAGINATION --><li><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a></li> {PAGINATION}<!-- ELSE --> <li><a>{PAGE_NUMBER}</a></li><!-- ENDIF --><!-- ENDIF -->
+	         <!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
+	        </ul>
+           </div>  	
+	    </div>
+</div>
+	
+
+	<table class="footable table table-striped table-bordered table-white table-primary table-hover">
+	<thead>
+	<tr>
+<!-- IF S_CLEAR_ALLOWED --><th><i class="icon-check-empty"></i> {L_MARK}</th><!-- ENDIF -->
+		<th data-class="expand"><i class="icon-bar-chart"></i> {L_MCP_DETAIL_U_IP}</th>
+		<th data-hide="phone"><i class="icon-time"></i> {L_TIME}</th>
+		<th data-hide="phone"><i class="icon-bar-chart"></i> {L_ACTION}</th>
+	</tr>
+	</thead>
+		<tbody>
+	<!-- IF S_LOGS -->
+		<!-- BEGIN log -->
+		<tr>
+			<!-- IF S_CLEAR_ALLOWED -->
+	        <td class="table-check"><div class="checker"><span><input type="checkbox" name="mark[]" id="{log.ID}" value="{log.ID}"><label for="{log.ID}"></label></span></div></td>
+	        <!-- ENDIF -->
+			<td>{log.USERNAME} <br>{log.IP}</td>
+			<td>{log.DATE}</td>
+			<td>{log.ACTION}<br />
+			{log.DATA}
+		</td>
+		</tr>
+		<!-- END log -->
+	<!-- ELSE -->
+		<tr>
+			<td colspan="<!-- IF S_CLEAR_ALLOWED -->5<!-- ELSE -->4<!-- ENDIF -->" >{L_NO_ENTRIES}</td>
+		</tr>
+	<!-- ENDIF -->
+	</tbody>
+	</table>
+
+	<!-- IF .log -->
+
+<div class="row-fluid">
+	   <div class="pull-right">
+	     <div class="pagination pagination-small">
+            <ul>
+	         <!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
+	         <!-- IF TOTAL --><li class="active"><a>{TOTAL}</a></li><!-- ENDIF -->
+             <!-- IF PAGE_NUMBER --><!-- IF PAGINATION --><li><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a></li> {PAGINATION}<!-- ELSE --> <li><a>{PAGE_NUMBER}</a></li><!-- ENDIF --><!-- ENDIF -->
+	         <!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
+	        </ul>
+           </div>  	
+	    </div>
+		
+	<!-- IF S_CLEAR_ALLOWED -->
+    <div class="pull-left">
+	<fieldset>
+	<div class="btn-group">
+	 <button class="btn" type="submit" name="action[del_all]" title="" data-original-title="{L_DELETE_ALL}"><i class="icon-trash"></i></button>
+	 <!-- IF not S_CLOSED -->
+	 <button class="btn" type="submit" name="action[del_marked]" title="" data-original-title="{L_DELETE_MARKED}"><i class="icon-remove"></i></button>
+	 <!-- ENDIF -->
+	</div>
+	
+	<div class="btn-group">
+	<a href="javascript:;" onclick="marklist('mcp', 'mark', true); return false;" class="btn" title="" data-original-title="{L_MARK_ALL}"><i class="icon-check"></i></a>
+	<a href="javascript:;" onclick="marklist('mcp', 'mark', false); return false;" class="btn" title="" data-original-title="{L_UNMARK_ALL}"><i class="icon-check-empty"></i></a>
+	</div>
+    </fieldset>
+	</div>
+	<!-- ENDIF -->
+		
+</div>
+
+<div class="space10"></div>
+
+		{S_FORM_TOKEN}
+	
+	<div class="row-fluid hidden-phone">
+                        <!-- // Column -->
+                        <div class="span12">
+                            <div class="widget-collapsible">
+                                <div class="widget-header-text"> 
+                                <div class="widget-tool"><a title="" data-original-title="" href="javascript:void(0);" data-target="#demo1" data-toggle="collapse" class="btn btn-glyph btn-link widget-toggle collapsed">{L_OPTIONS}</a></div>
+                                </div>
+                                <div style="height: 0px;" class="widget-content collapse" id="demo1">
+                                    <div class="widget-body-text">
+										<fieldset>
+	                                      <div class="controls controls-row"> 
+										  <div class="span4"> 
+                                           <label class="control-label" for="bday_day">{L_DISPLAY_POSTS}:</label>
+                                           <div class="controls">
+                                           <div class="selector">{S_SELECT_SORT_DAYS}</div> 
+                                         </div>
+										  </div>
+	 
+	                                       <div class="span4"> 
+                                           <label class="control-label" for="bday_day">{L_SORT_BY} </label>
+                                           <div class="controls">
+                                            <div class="selector">{S_SELECT_SORT_KEY}</div> 
+                                           </div>
+										     </div>
+											
+											<div class="span4"> 
+                                           <label class="control-label" for="bday_day">{L_SORT_BY}</label>
+                                          <div class="controls">
+										   <div class="input-append">
+                                            <div class="selector">{S_SELECT_SORT_DIR}</div> 
+                                          <button class="btn" name="sort" type="submit">{L_GO}</button>
+	                                     
+										 </div>
+										 </div>
+		                                   
+										 </div>
+										 
+										 </div> 
+
+	                                    </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // Widget --> 
+                        </div>
+                        <!-- // Column --><!-- // Column -->  
+                    </div>
+	
+	
+	
+	
+	<!-- ELSE -->
+			{S_FORM_TOKEN}
+	<!-- ENDIF -->
+</form>
+
+<br />
+
+<!-- INCLUDE mcp_footer.html -->

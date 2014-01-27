@@ -1,0 +1,68 @@
+<!-- INCLUDE mcp_header.html -->
+
+<form method="post" id="mcp" action="{U_POST_ACTION}">
+
+<h2>{L_MCP_WARN_POST}</h2>
+
+<div class="well">
+<div class="row-fluid">
+
+    <div class="span2">
+     <!-- IF AVATAR_IMG -->{AVATAR_IMG}<!-- ENDIF -->
+    </div>
+    <div class="span4">
+     
+        <p><i class="icon-user"></i> <!-- IF USER_COLOR --><span style="color: #{USER_COLOR}">{USERNAME}</span><!-- ELSE -->{USERNAME}<!-- ENDIF --></p>
+        <small><cite title="Source Title"><!-- IF RANK_TITLE -->{RANK_TITLE}<!-- ENDIF --><!-- IF RANK_IMG --><br>{RANK_IMG}<!-- ENDIF --></cite></small>
+     
+      <p>
+        <i class="icon-calendar"></i> {L_JOINED}: {JOINED}<br>
+        <i class="icon-comments"></i> {L_TOTAL_POSTS}: {POSTS} <br>
+        <i class="icon-warning-sign"></i> {L_WARNINGS}: {WARNINGS}
+      </p>
+    </div>
+	
+</div>
+</div>
+
+
+
+<div class="well">
+
+<h3>{L_POST_DETAILS}</h3>
+
+		<div class="content">
+			{POST}
+		</div>
+</div>
+
+
+<div class="well">
+
+	<fieldset>
+		
+		<div class="control-group"> 
+		 <label class="control-label" for="warning">{L_ADD_WARNING}:</label><span class="help-block">{L_ADD_WARNING_EXPLAIN}</span>
+	        <div class="controls controls-row"> 
+              <textarea placeholder="{L_MORE_INFO}..." rows="2" name="warning" id="warning" class="span12">{L_WARNING_POST_DEFAULT}</textarea>
+	         </div> 
+	    </div>	
+		<!-- IF S_CAN_NOTIFY -->
+         	<div class="controls controls-row"> 
+              <input type="checkbox" name="notify_user" id="notify_user" checked="checked"><label for="notify_user">{L_NOTIFY_USER_WARN}</label> 
+	         </div>
+		<!-- ENDIF -->
+
+	</fieldset>
+
+</div>
+
+
+<fieldset class="form-actions">
+	<input type="reset" value="{L_RESET}" name="reset" class="btn" />
+	<input type="submit" name="action[add_warning]" value="{L_SUBMIT}" class="btn" />
+	{S_FORM_TOKEN}
+</fieldset>
+</form>
+
+<!-- INCLUDE mcp_footer.html -->

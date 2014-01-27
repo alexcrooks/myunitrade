@@ -1,0 +1,90 @@
+<div class="tab-pane active">
+
+	<fieldset class="framed-ucp">
+	<legend>{L_TITLE}</legend>
+	<!-- IF not S_AVATARS_ENABLED -->
+		<p>{L_AVATAR_FEATURES_DISABLED}</p>
+	<!-- ENDIF -->
+	
+	<!-- IF ERROR --><p class="error">{ERROR}</p><!-- ENDIF -->
+	
+	                   
+                                 <label for="uploadfile" class="control-label">{L_CURRENT_IMAGE}:</label>
+                                 <div class="controls controls-row"> 
+                                    <div data-provides="fileupload" class="fileupload fileupload-new">
+                                       <div style="width: 100px; height: 100px;" class="fileupload-new thumbnail">
+                                         <!-- IF AVATAR -->{AVATAR}<!-- ELSE --><img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" /><!-- ENDIF -->
+                                       </div>
+                                       <div style="max-width: 100px; max-height: 100px; line-height: 20px;" class="fileupload-preview fileupload-exists thumbnail"></div>
+									  <!-- IF S_UPLOAD_AVATAR_FILE -->
+									   <div>
+                                          <span class="btn btn-file"><span class="fileupload-new">Browse</span>
+                                          <span class="fileupload-exists">Change</span>
+                                           <input type="hidden" name="MAX_FILE_SIZE" value="{AVATAR_SIZE}" /><input type="file" name="uploadfile" id="uploadfile" class="default">
+										  </span>
+                                          <a data-dismiss="fileupload" class="btn fileupload-exists" href="#">Remove</a>
+										 <!-- IF AVATAR --> <input type="checkbox" name="delete" id="delete" ><label for="delete">{L_DELETE_AVATAR}</label><!-- ELSE --><!-- ENDIF -->
+                                       </div>
+									  <!-- ENDIF -->
+                                    </div>
+                                    <div class="help-block"><span class="label label-important">NOTE!</span> {L_AVATAR_EXPLAIN}</div>
+                                 </div>
+                        
+
+    <!-- IF S_UPLOAD_AVATAR_URL -->   
+	  <div class="control-group">
+      <label for="uploadurl" class="control-label">{L_UPLOAD_AVATAR_URL}:</label><span class="help-block">{L_UPLOAD_AVATAR_URL_EXPLAIN}</span>
+        <div class="controls controls-row"> 
+             <input type="text" name="uploadurl" id="uploadurl" value="{AVATAR_URL}" class="span9" placeholder="http://the-avatar-site/avatar.gif">
+        </div>
+      </div>
+	<!-- ENDIF -->
+	
+	<!-- IF S_LINK_AVATAR -->
+	 <div class="control-group">
+      <label for="remotelink" class="control-label">{L_LINK_REMOTE_AVATAR}:</label><span class="help-block">{L_LINK_REMOTE_AVATAR_EXPLAIN}</span>
+        <div class="controls controls-row"> 
+             <input type="text" name="remotelink" id="remotelink" value="{AVATAR_REMOTE}" class="span9" placeholder="http://the-avatar-site/avatar.gif">
+        </div>
+      </div>
+		
+	 <div class="control-group">
+         <label for="width" class="control-label">{L_LINK_REMOTE_SIZE}:</label><span class="help-block">{L_LINK_REMOTE_SIZE_EXPLAIN}</span>
+        <div class="controls controls-row">
+                <div class="input-append">
+                   <input type="text" name="width" id="width" value="{AVATAR_WIDTH}" class="span4" placeholder="width"><span class="add-on">px</span>
+                </div>
+		<div class="input-append">
+             <input type="text" name="height" id="height" value="{AVATAR_HEIGHT}" class="span4" placeholder="height"><span class="add-on">px</span>
+         </div>
+        </div>
+	</div>
+	<!-- ENDIF -->
+	
+	</fieldset>
+
+	<!-- IF S_IN_AVATAR_GALLERY -->
+         <div class="space10"></div>
+		<fieldset class="framed-ucp">
+		  <legend>{L_AVATAR_GALLERY}</legend>
+		
+			<label class="control-label" for="category">{L_AVATAR_CATEGORY}:</label>
+		 <div class="controls controls-row">
+			<div class="input-append">
+			<select class="selectpicker" data-container="body" name="category" id="category">{S_CAT_OPTIONS}</select>
+		     <button type="submit" value="{L_GO}" name="display_gallery" class="btn btn-rounded" >{L_GO}</button>
+			 <button type="submit" name="cancel" value="{L_CANCEL}" class="btn btn-rounded" >{L_CANCEL}</button>
+		 </div>
+		 </div>
+		</fieldset>
+
+		<div id="gallery">
+		<!-- BEGIN avatar_row --><!-- BEGIN avatar_column -->
+			<label for="av-{avatar_row.S_ROW_COUNT}-{avatar_row.avatar_column.S_ROW_COUNT}"><img src="{avatar_row.avatar_column.AVATAR_IMAGE}" alt="" /><br />
+				<input type="radio" name="avatar_select" id="av-{avatar_row.S_ROW_COUNT}-{avatar_row.avatar_column.S_ROW_COUNT}" value="{avatar_row.avatar_column.AVATAR_FILE}" /></label>
+		<!-- END avatar_column --><!-- END avatar_row -->
+		</div>
+
+	<!-- ENDIF -->
+
+	</div>
